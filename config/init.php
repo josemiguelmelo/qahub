@@ -4,14 +4,14 @@
 
   error_reporting(E_ERROR | E_WARNING); // E_NOTICE by default
 
-  $BASE_DIR = '/path/to/framework/folder/'; //FIXME
-  $BASE_URL = '/~lbaw1461/public_html/'; //FIXME
+  $BASE_DIR = '/opt/lbaw/lbaw1461/public_html/qahub/'; //FIXME
+  $BASE_URL = '/~lbaw1461/qahub/'; //FIXME
 
-  $conn = new PDO('pgsql:host=vdbm;dbname=_dbname_', '_username_', '_password_'); //FIXME
+  $conn = new PDO('pgsql:host=vdbm.fe.up.pt;dbname=lbaw1461', 'lbaw1461', 'fB702dy5'); //FIXME
   $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-  $conn->exec('SET SCHEMA \'_schema_\''); //FIXME
+  $conn->exec('SET SCHEMA \'qahub\''); //FIXME
 
   include_once($BASE_DIR . 'lib/smarty/Smarty.class.php');
   
