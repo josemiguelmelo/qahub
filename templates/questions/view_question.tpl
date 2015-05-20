@@ -18,9 +18,9 @@
     <div class="content animated zoomIn">
         <div class="row social-board">
             <div class="col-lg-1 vote-thumbs">
-                <span class="fa fa-thumbs-o-up"></span>
+                <span class="fa fa-thumbs-o-up" data-id="{$question.question.contentid}" data-value="1"></span>
                 <p>{$question.questionVotes}</p>
-                <span class="fa fa-thumbs-o-down"></span>
+                <span class="fa fa-thumbs-o-down" data-id="{$question.question.contentid}" data-value="-1"></span>
             </div>
             <div class="col-lg-11">
                 <div class="hpanel hblue">
@@ -56,10 +56,10 @@
         {foreach from=$question.answers item=answer}
             <div class="row social-board">
                 <div class="col-lg-1 vote-thumbs">
-                    <span class="fa fa-thumbs-o-up"></span>
+                    <span class="fa fa-thumbs-o-up" data-id="{$answer.contentid}" data-value="1"></span>
 
                     <p>{$answer.classification}</p>
-                    <span class="fa fa-thumbs-o-down"></span>
+                    <span class="fa fa-thumbs-o-down" data-id="{$answer.contentid}" data-value="-1"></span>
                 </div>
                 <div class="col-lg-11">
                     <div class="hpanel hblue">
@@ -89,27 +89,29 @@
             </div>
         {/foreach}
 
+        {if $question.question.closed === false}
+            <div class="row">
+                <div class="col-lg-12 animated-panel zoomIn" style="-webkit-animation-delay: 0.2s;">
+                    <div class="hpanel">
+                        <div class="panel-heading">
+                            Your Answer
+                        </div>
+                        <div class="panel-body">
+                            <form action="{$BASE_URL}actions/questions/add_answer.php" id="addAnswerForm" method="post">
+                                <input hidden="true" name="questionId" value="{$question.question.questionid}"/>
+                                <textarea name="answerContent" class="form-control" rows="3"></textarea>
+                                <br/>
+                                <button type="submit" class="btn btn-default">Submit</button>
+                            </form>
 
-
-        <div class="row">
-            <div class="col-lg-12 animated-panel zoomIn" style="-webkit-animation-delay: 0.2s;">
-                <div class="hpanel">
-                    <div class="panel-heading">
-                        Your Answer
-                    </div>
-                    <div class="panel-body">
-                        <form action="{$BASE_URL}actions/questions/add_answer.php" id="addAnswerForm" method="post">
-                            <input hidden="true" name="questionId" value="{$question.question.questionid}"/>
-                            <textarea name="answerContent" class="form-control" rows="3"></textarea>
-                            <br/>
-                            <button type="submit" class="btn btn-default">Submit</button>
-                        </form>
-
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        {/if}
+
 
     </div>
 
 {include file='common/footer.tpl'}
+

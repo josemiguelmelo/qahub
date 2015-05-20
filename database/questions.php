@@ -67,9 +67,17 @@ function getAllQuestions() {
 
 }
 
+function getAllUserQuestions($user_id) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT content.created_when, question.id, question.title, question.content, question.priority, question.closed
+                            FROM content, question WHERE content.content_type = 1 AND content.table_id = question.id AND content.user_id = ?");
+    $stmt->execute(array($user_id));
+    return $stmt->fetchAll();
+}
+
 function getQuestionById($id){
     global $conn;
-    $stmt = $conn->prepare("SELECT content.created_when, content.id AS contentid, question.id AS questionId, question.title, question.content, question.priority, \"User\".*
+    $stmt = $conn->prepare("SELECT content.created_when, content.id AS contentid, question.id AS questionId, question.title, question.content, question.priority,question.closed , \"User\".*
                             FROM content, question, \"User\" WHERE content.content_type = 1 AND content.table_id = question.id AND content.table_id = $id AND \"User\".id = content.user_id");
     $stmt->execute();
     $question =  $stmt->fetch();
@@ -99,19 +107,21 @@ function getQuestionById($id){
         $answersContentId[] = $answer['contentid'];
     }
 
-    //answers votes
-    $qMarks = str_repeat('?,', count($answersContentId)-1) . '?';
+    if(count($answers) != 0) {
+        //answers votes
+        $qMarks = str_repeat('?,', count($answersContentId) - 1) . '?';
 
-    $stmt = $conn->prepare("SELECT sum(vote.classification) as classification , vote.content_id FROM vote WHERE vote.content_id IN ($qMarks) GROUP BY vote.content_id");
-    $stmt->execute($answersContentId);
-    $answersVotes =  $stmt->fetchAll();
+        $stmt = $conn->prepare("SELECT sum(vote.classification) as classification , vote.content_id FROM vote WHERE vote.content_id IN ($qMarks) GROUP BY vote.content_id");
+        $stmt->execute($answersContentId);
+        $answersVotes = $stmt->fetchAll();
 
 
-    for($i = 0; $i < count($answers) ; $i++) {
-        $answers[$i]['classification'] =0;
-        foreach($answersVotes as $vote){
-            if($answers[$i]['contentid'] == $vote['content_id']){
-                $answers[$i]['classification'] = ($vote['classification'] >= 0) ? ('+' . $vote['classification']) : $vote['classification'];
+        for ($i = 0; $i < count($answers); $i++) {
+            $answers[$i]['classification'] = 0;
+            foreach ($answersVotes as $vote) {
+                if ($answers[$i]['contentid'] == $vote['content_id']) {
+                    $answers[$i]['classification'] = ($vote['classification'] >= 0) ? ('+' . $vote['classification']) : $vote['classification'];
+                }
             }
         }
     }
@@ -122,4 +132,15 @@ function getQuestionById($id){
         'answers' => $answers,
         'questionVotes' => $questionVotes['classification'],
     ];
+}
+
+
+function closeQuestion($questionId){
+    global $conn;
+        $stmt = $conn->prepare("UPDATE question
+                            SET closed = TRUE WHERE question.id = ?");
+        $stmt->execute(array($questionId));
+
+
+
 }

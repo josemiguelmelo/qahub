@@ -537,3 +537,10 @@ body.page-small.show-sidebar #menu {
 body.page-small.show-sidebar #wrapper {
     margin-left: 180px
 }
+
+
+
+.fa-thumbs-o-up:hover , .fa-thumbs-o-down:hover{
+    color: black;
+    cursor:pointer;
+}

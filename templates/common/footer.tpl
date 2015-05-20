@@ -1,4 +1,6 @@
-
+<script>
+    var BASE_URL = "{$BASE_URL}";
+</script>
 <!-- Vendor scripts -->
 <script src="{$BASE_URL}/vendor/jquery/dist/jquery.min.js"></script>
 <script src="{$BASE_URL}/vendor/jquery-ui/jquery-ui.min.js"></script>
@@ -10,6 +12,7 @@
 
 <!-- App scripts -->
 <script src="{$BASE_URL}/javascript/qahub.js"></script>
+<script src="{$BASE_URL}/javascript/vote.js"></script>
 
-    </body>
+</body>
 </html>
