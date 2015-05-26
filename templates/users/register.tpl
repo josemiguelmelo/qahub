@@ -7,7 +7,7 @@
                 <h3>Registration</h3>
             </div>
             <div class="hpanel">
-                <div class="panel-body">
+                <div class="panel-body login-box">
                     <form role="form" action="{$BASE_URL}actions/users/register.php" method="POST">
                     <div class="row">
                             <div class="form-group col-lg-12">
