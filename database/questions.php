@@ -134,7 +134,6 @@ function getQuestionById($id){
     ];
 }
 
-
 function closeQuestion($questionId){
     global $conn;
         $stmt = $conn->prepare("UPDATE question
@@ -142,5 +141,12 @@ function closeQuestion($questionId){
         $stmt->execute(array($questionId));
 
 
+function search($content)
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT content.created_when, question.id, question.title, question.content, question.priority
+                            FROM content, question WHERE content.content_type = 1 AND content.table_id = question.id AND to_tsvector(title||' '||content) @@ plainto_tsquery(?);");
+	$stmt->execute(array($content));
+	return $stmt->fetchAll();
 
 }

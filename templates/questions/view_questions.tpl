@@ -11,7 +11,7 @@
                 <h2 class="font-light m-b-xs">
                     Questions
                 </h2>
-                <small>The most popular questions right now.</small>
+                <small>{$subtitle}</small>
             </div>
         </div>
     </div>

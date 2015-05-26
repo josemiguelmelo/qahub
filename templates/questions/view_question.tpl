@@ -17,12 +17,12 @@
 
     <div class="content animated zoomIn">
         <div class="row social-board">
-            <div class="col-lg-1 vote-thumbs">
+            <div class="col-lg-1 col-xs-2 vote-thumbs">
                 <span class="fa fa-thumbs-o-up" data-id="{$question.question.contentid}" data-value="1"></span>
                 <p>{$question.questionVotes}</p>
                 <span class="fa fa-thumbs-o-down" data-id="{$question.question.contentid}" data-value="-1"></span>
             </div>
-            <div class="col-lg-11">
+            <div class="col-lg-11 col-xs-10">
                 <div class="hpanel hblue">
                     <div class="panel-body">
                         <div class="media social-profile clearfix">
@@ -55,13 +55,12 @@
 
         {foreach from=$question.answers item=answer}
             <div class="row social-board">
-                <div class="col-lg-1 vote-thumbs">
+                <div class="col-lg-1 col-xs-2 vote-thumbs">
                     <span class="fa fa-thumbs-o-up" data-id="{$answer.contentid}" data-value="1"></span>
-
                     <p>{$answer.classification}</p>
                     <span class="fa fa-thumbs-o-down" data-id="{$answer.contentid}" data-value="-1"></span>
                 </div>
-                <div class="col-lg-11">
+                <div class="col-lg-11 col-xs-10">
                     <div class="hpanel hblue">
                         <div class="panel-body">
                             <div class="media social-profile clearfix">

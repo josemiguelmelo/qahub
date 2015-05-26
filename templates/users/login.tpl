@@ -7,7 +7,7 @@
                 <h3>PLEASE LOGIN TO ASK A QUESTION</h3>
                 <small>This is the best place to have doubts!</small>
             </div>
-            <div class="hpanel">
+            <div class="hpanel login-box">
                 <div class="panel-body">
                     <form action="{$BASE_URL}actions/users/login.php" id="loginForm" method="post">
                         <div class="form-group">

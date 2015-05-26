@@ -428,19 +428,19 @@ a:focus {
 .social-talk .social-profile img {
     height: 32px;
     width: 32px;
-    border-radius: 50%
+    border-radius: 50%;
 }
 
 .social-talk .text-muted {
-    color: #aaacae
+    color: #aaacae;
 }
 
 .social-talk {
-    margin-bottom: 10px
+    margin-bottom: 10px;
 }
 
-.social-talk .social-content {
-    margin-top: 2px
+.social-content {
+    margin-top: 20px;
 }
 
 .avatar {
@@ -503,7 +503,7 @@ a:focus {
 }
 
 .login-container {
-    width: 420px;
+    max-width: 500px;
     margin: auto;
     padding-top: 6%
 }
@@ -539,8 +539,11 @@ body.page-small.show-sidebar #wrapper {
 }
 
 
-
 .fa-thumbs-o-up:hover , .fa-thumbs-o-down:hover{
     color: black;
     cursor:pointer;
+}
+
+.login-box {
+    margin: 20px 5px 0 5px;
 }
