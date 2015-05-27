@@ -16,7 +16,7 @@ $(document).ready(function() {
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
-                console.log("error");
+                bootbox.alert("Please login in order to vote.");
             }
         });
     });
@@ -38,7 +38,7 @@ $(document).ready(function() {
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
-                console.log("error");
+                bootbox.alert("Please login in order to vote.");
             }
         });
     });

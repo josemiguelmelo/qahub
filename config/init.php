@@ -4,8 +4,8 @@
 
   error_reporting(E_ERROR | E_WARNING); // E_NOTICE by default
 
-  $BASE_DIR = '/opt/lbaw/lbaw1461/public_html/tiago/'; //FIXME
-  $BASE_URL = '/~lbaw1461/tiago/'; //FIXME
+  $BASE_DIR = '/opt/lbaw/lbaw1461/public_html/rui/'; //FIXME
+  $BASE_URL = '/~lbaw1461/rui/'; //FIXME
 
 
   $conn = new PDO('pgsql:host=vdbm.fe.up.pt;dbname=lbaw1461', 'lbaw1461', 'fB702dy5'); //FIXME

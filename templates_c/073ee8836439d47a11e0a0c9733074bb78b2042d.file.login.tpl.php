@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.15, created on 2015-05-20 12:15:46
+<?php /* Smarty version Smarty-3.1.15, created on 2015-05-27 12:36:09
          compiled from "/opt/lbaw/lbaw1461/public_html/melo/templates/users/login.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1151831225555c5ed2b96e08-04962984%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '073ee8836439d47a11e0a0c9733074bb78b2042d' => 
     array (
       0 => '/opt/lbaw/lbaw1461/public_html/melo/templates/users/login.tpl',
-      1 => 1430223840,
+      1 => 1432721179,
       2 => 'file',
     ),
   ),
@@ -15,13 +15,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.15',
+  'unifunc' => 'content_555c5ed2c3ad00_75008342',
   'variables' => 
   array (
     'BASE_URL' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.15',
-  'unifunc' => 'content_555c5ed2c3ad00_75008342',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_555c5ed2c3ad00_75008342')) {function content_555c5ed2c3ad00_75008342($_smarty_tpl) {?><?php echo $_smarty_tpl->getSubTemplate ('common/header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
@@ -33,7 +33,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 <h3>PLEASE LOGIN TO ASK A QUESTION</h3>
                 <small>This is the best place to have doubts!</small>
             </div>
-            <div class="hpanel">
+            <div class="hpanel login-box">
                 <div class="panel-body">
                     <form action="<?php echo $_smarty_tpl->tpl_vars['BASE_URL']->value;?>
 actions/users/login.php" id="loginForm" method="post">
