@@ -444,7 +444,7 @@ a:focus {
 }
 
 .avatar {
-    max-width: 50px;
+    max-width: 100px;
 }
 
 .vote-thumbs {
@@ -546,4 +546,12 @@ body.page-small.show-sidebar #wrapper {
 
 .login-box {
     margin: 20px 5px 0 5px;
+}
+
+.youtube-player {
+    margin-bottom: 15px;
+}
+
+.youtube-player h3 {
+    margin-top: 0px;
 }

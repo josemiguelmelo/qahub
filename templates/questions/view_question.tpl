@@ -37,9 +37,10 @@
                             </div>
                         </div>
 
-                        <div class="social-content m-t-md">
-                            {$question.question.content}
+                        <div id="question-content" class="social-content m-t-md">
+                            {nl2br($question.question.content)}
                         </div>
+
                     </div>
                     <div class="panel-footer">
                         <div class="social-form">
@@ -74,6 +75,10 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="youtube-player" style="display: none;">
+            <h3>Attachments</h3>
         </div>
 
         <ol class="breadcrumb">
