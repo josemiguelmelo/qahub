@@ -2,6 +2,8 @@
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/questions.php');
 
+checkIfLoggedIn();
+
 $questions = getAllUserQuestions($_SESSION['user']['id']);
 
 $smarty->assign('all_user_questions', $questions);

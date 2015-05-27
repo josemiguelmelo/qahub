@@ -1,17 +1,12 @@
 {include file='common/header.tpl'}
 {include file='common/navigation.tpl'}
 
-
-<!-- Main Wrapper -->
-<div id="wrapper">
-
     <div class="normalheader transition animated fadeIn">
         <div class="hpanel">
             <div class="panel-body">
                 <h2 class="font-light m-b-xs">
-                    Questions
+                    Your Questions
                 </h2>
-                <small>The most popular questions right now.</small>
             </div>
         </div>
     </div>
@@ -43,6 +38,17 @@
                                 </div>
                             </div>
 
+                        {foreachelse}
+                            <div class="vertical-timeline-block animated-panel zoomIn" style="-webkit-animation-delay: 0.2s;">
+                                <div class="vertical-timeline-icon navy-bg">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <div class="vertical-timeline-content">
+                                    <div class="p-sm">
+                                        <h3 class="no-questions">You have no questions yet.</h3>
+                                    </div>
+                                </div>
+                            </div>
                         {/foreach}
                     </div>
                 </div>

@@ -2,6 +2,8 @@
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/questions.php');
 
+checkIfLoggedIn();
+
 if (!$_POST['title'] || !$_POST['question']) {
     $_SESSION['error_messages'][] = 'Invalid login';
     $_SESSION['form_values'] = $_POST;

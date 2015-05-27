@@ -1,9 +1,6 @@
 {include file='common/header.tpl'}
 {include file='common/navigation.tpl'}
 
-<!-- Main Wrapper -->
-<div id="wrapper">
-
     <div class="normalheader animated bounce">
         <div class="hpanel">
             <div class="panel-body">
@@ -58,7 +55,7 @@
                                             <span class="font-bold">{$comment.name}</span>
                                             <small class="text-muted">{$comment.created_when}</small>
 
-                                            <div class="social-content">
+                                            <div class="comment">
                                                 {$comment.content}
                                             </div>
                                         </div>
@@ -66,10 +63,11 @@
                                 </div>
                                 
                                 {/foreach}
-                                
-                                
+
+                                {if isset($smarty.session.user) }
                                 <input hidden="true" name="questionId" value="{$question.question.questionid}"/>
                                 <input name="commentContent" class="form-control comment" placeholder="Your comment">
+                                {/if}
                             </form>
                         </div>
                     </div>
@@ -126,7 +124,7 @@
                                                     <span class="font-bold">{$comment.name}</span>
                                                     <small class="text-muted">{$comment.created_when}</small>
         
-                                                    <div class="social-content">
+                                                    <div class="comment">
                                                         {$comment.content}
                                                     </div>
                                                 </div>
@@ -134,10 +132,11 @@
                                         </div>
                                     
                                     {/foreach}
-                                    
-                                    
+
+                                    {if isset($smarty.session.user) }
                                     <input hidden="true" name="answerId" value="{$answer.contentid}"/>
                                     <input name="commentContent" class="form-control comment" placeholder="Your comment">
+                                    {/if}
                                 </form>
                             </div>
                         </div>
@@ -146,7 +145,7 @@
             </div>
         {/foreach}
 
-        {if $question.question.closed === false}
+        {if $question.question.closed === false && isset($smarty.session.user) }
             <div class="row">
                 <div class="col-lg-12 animated-panel zoomIn" style="-webkit-animation-delay: 0.2s;">
                     <div class="hpanel">

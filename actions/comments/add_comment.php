@@ -2,6 +2,8 @@
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/comments.php');
 
+checkIfLoggedIn();
+
 if (!$_POST['commentContent']) {
     $_SESSION['error_messages'][] = 'Comment required.';
     $_SESSION['form_values'] = $_POST;

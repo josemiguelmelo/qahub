@@ -1,10 +1,5 @@
 {include file='common/header.tpl'}
-
 {include file='common/navigation.tpl'}
-
-
-<!-- Main Wrapper -->
-<div id="wrapper">
 
     <div class="normalheader transition animated fadeIn">
         <div class="hpanel">

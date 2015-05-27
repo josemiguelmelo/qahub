@@ -3,6 +3,8 @@ include_once('../../config/init.php');
 
 include_once($BASE_DIR .'database/votes.php');
 
+checkIfLoggedIn();
+
 $contentId = $_POST['content_id'];
 $value = $_POST['value'];
 

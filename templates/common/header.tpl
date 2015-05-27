@@ -25,16 +25,6 @@
 
 </head>
 <body>
-<div id="error_messages">
-    {foreach $ERROR_MESSAGES as $error}
-        <div class="error">{$error}<a class="close" href="#">X</a></div>
-    {/foreach}
-</div>
-<div id="success_messages">
-    {foreach $SUCCESS_MESSAGES as $success}
-        <div class="success">{$success}<a class="close" href="#">X</a></div>
-    {/foreach}
-</div>
 <!--[if lt IE 7]>
 <p class="alert alert-danger">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->

@@ -38,3 +38,25 @@ function time_elapsed_string($ptime)
 		}
 	}
 }
+
+function requestIsJson()
+{
+	return $_SERVER['X-Requested-With'] == 'XMLHttpRequest';
+}
+
+function checkIfAdmin()
+{
+	if($_SESSION['user']['role'] != 2)
+	{
+		die('Pls no hackings');
+	}
+}
+
+function checkIfLoggedIn()
+{
+	global $BASE_URL;
+	if(! $_SESSION['user'])
+	{
+		header("Location: " . $BASE_URL. 'pages/users/login.php');
+	}
+}

@@ -8,11 +8,21 @@
             </div>
             <div class="hpanel">
                 <div class="panel-body login-box">
+                    <div id="error_messages">
+                        {foreach $ERROR_MESSAGES as $error}
+                            <div class="alert alert-danger">{$error}</div>
+                        {/foreach}
+                    </div>
+                    <div id="success_messages">
+                        {foreach $SUCCESS_MESSAGES as $success}
+                            <div class="alert alert-success">{$success}</div>
+                        {/foreach}
+                    </div>
                     <form role="form" action="{$BASE_URL}actions/users/register.php" method="POST">
                     <div class="row">
                             <div class="form-group col-lg-12">
                                 <label>Name</label>
-                                <input type="" value="" id="usernameRegister" class="form-control" name="username">
+                                <input type="text" value="{$smarty.session.oldinput.username}" id="usernameRegister" class="form-control" name="username">
                             </div>
                             <div class="form-group col-lg-6">
                                 <label>Password</label>
@@ -24,7 +34,7 @@
                             </div>
                             <div class="form-group col-lg-12">
                                 <label>Email Address</label>
-                                <input type="email" value="" id="" class="form-control" name="email">
+                                <input type="email" value="{$smarty.session.oldinput.email}" id="" class="form-control" name="email">
                             </div>
                             <div class="text-center">
                                 <button class="btn btn-success">Register</button>

@@ -27,7 +27,7 @@
         {if isset($smarty.session.user) }
 
             <div class="profile-picture">
-                <a href="#profile">
+                <a href="{$BASE_URL}pages/users/view_profile.php">
                     <img src="{$smarty.session.user.avatar}" class="avatar img-circle m-b" alt="logo">
 
                     <div class="stats-label text-color">
@@ -37,7 +37,7 @@
             </div>
             {if $smarty.session.user.role eq 2} <!-- user is admin -->
                 <ul class="nav" id="side-menu">
-                    <li class="active">
+                    <li>
                         <a href="{$BASE_URL}pages/questions/view_questions.php"> <span class="nav-label">See questions</span></a>
                     </li>
                     <li>
@@ -54,7 +54,7 @@
                     <a href="{$BASE_URL}pages/questions/create_question.php"> <span class="nav-label">Ask a Question</span></a>
                 </li>
                 <li>
-                    <a href="#"> <span class="nav-label">Your Questions</span></a>
+                    <a href="{$BASE_URL}pages/questions/view_your_questions.php"> <span class="nav-label">Your Questions</span></a>
                 </li>
                 <li>
                     <a href="{$BASE_URL}actions/users/logout.php"> <span class="nav-label">Logout</span></a>
@@ -73,3 +73,20 @@
         {/if}
     </div>
 </aside>
+
+<!-- Main Wrapper -->
+<div id="wrapper">
+    {if isset($ERROR_MESSAGES) || isset($SUCCESS_MESSAGES)}
+    <div class="normalheader">
+        <div id="error_messages">
+            {foreach $ERROR_MESSAGES as $error}
+                <div class="alert alert-danger">{$error}</div>
+            {/foreach}
+        </div>
+        <div id="success_messages">
+            {foreach $SUCCESS_MESSAGES as $success}
+                <div class="alert alert-success">{$success}</div>
+            {/foreach}
+        </div>
+    </div>
+{/if}

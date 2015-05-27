@@ -4,7 +4,7 @@ $(document).ready(function() {
         var value = $(this).data("value");
         var next = $(this).next();
         $.ajax({
-            url : BASE_URL + "actions/vote/vote.php",
+            url : BASE_URL + "api/vote/vote.php",
             type: "POST",
             data : {content_id: contentid, value: value},
             success: function(data, textStatus, jqXHR)
@@ -26,7 +26,7 @@ $(document).ready(function() {
         var value = $(this).data("value");
         var previous = $(this).prev();
         $.ajax({
-            url : BASE_URL + "actions/vote/vote.php",
+            url : BASE_URL + "api/vote/vote.php",
             type: "POST",
             data : {content_id: contentid, value: value},
             success: function(data, textStatus, jqXHR)

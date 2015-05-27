@@ -23,3 +23,9 @@
 
 </body>
 </html>
+
+{php}
+    unset($_SESSION['oldinput']);
+    unset($_SESSION['error_messages']);
+    unset($_SESSION['success_messages']);
+{/php}

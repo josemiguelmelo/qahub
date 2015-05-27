@@ -9,10 +9,20 @@
             </div>
             <div class="hpanel login-box">
                 <div class="panel-body">
+                    <div id="error_messages">
+                        {foreach $ERROR_MESSAGES as $error}
+                            <div class="alert alert-danger">{$error}</div>
+                        {/foreach}
+                    </div>
+                    <div id="success_messages">
+                        {foreach $SUCCESS_MESSAGES as $success}
+                            <div class="alert alert-success">{$success}</div>
+                        {/foreach}
+                    </div>
                     <form action="{$BASE_URL}actions/users/login.php" id="loginForm" method="post">
                         <div class="form-group">
                             <label class="control-label" for="email">E-mail</label>
-                            <input type="email" placeholder="example@gmail.com" title="Please enter you username" required="" value="" name="email" id="email" class="form-control">
+                            <input type="email" placeholder="example@gmail.com" title="Please enter you email" required="" value="{$smarty.session.oldinput.email}" name="email" id="email" class="form-control">
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="password">Password</label>
