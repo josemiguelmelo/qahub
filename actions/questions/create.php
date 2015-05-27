@@ -25,4 +25,4 @@ try {
 }
 $_SESSION['success_messages'][] = 'Question created successfully';
 header("Location: " . $BASE_URL. 'pages/questions/view_questions.php');
-?>
+

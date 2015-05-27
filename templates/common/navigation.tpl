@@ -25,6 +25,7 @@
     <div id="navigation">
 
         {if isset($smarty.session.user) }
+
             <div class="profile-picture">
                 <a href="#profile">
                     <img src="{$smarty.session.user.avatar}" class="avatar img-circle m-b" alt="logo">
@@ -34,6 +35,20 @@
                     </div>
                 </a>
             </div>
+            {if $smarty.session.user.role eq 2} <!-- user is admin -->
+                <ul class="nav" id="side-menu">
+                    <li class="active">
+                        <a href="{$BASE_URL}pages/questions/view_questions.php"> <span class="nav-label">See questions</span></a>
+                    </li>
+                    <li>
+                        <a href="{$BASE_URL}pages/users/view_users.php"> <span class="nav-label">See users</span></a>
+                    </li>
+                    <li>
+                        <a href="{$BASE_URL}actions/users/logout.php" > <span class="nav-label">Logout</span></a>
+                    </li>
+                </ul>
+
+            {else} <!-- if it is a normal user -->
             <ul class="nav" id="side-menu">
                 <li>
                     <a href="{$BASE_URL}pages/questions/create_question.php"> <span class="nav-label">Ask a Question</span></a>
@@ -45,6 +60,7 @@
                     <a href="{$BASE_URL}actions/users/logout.php"> <span class="nav-label">Logout</span></a>
                 </li>
             </ul>
+            {/if}
         {else}
             <ul class="nav" id="side-menu">
                 <li>

@@ -1,34 +1,87 @@
 <?php
-  
-  function createUser($username, $email, $password) {
-    global $conn;
+include_once($BASE_DIR.'database/questions.php');
 
-      $role=1;
-      $referal ="";
-      $cash = 0;
-      $last_access = date("Y-m-d H:i:s");
-      $created_when = date("Y-m-d H:i:s");
-        $avatar = "http://heintendsvictory.org/wp-content/uploads/default-avatar.png";
+function createUser($username, $email, $password)
+{
+	global $conn;
 
-      $stmt = $conn->prepare("INSERT INTO \"User\" (name,email,password,ROLE,referral,cash,last_acess,avatar,created_when) VALUES (?, ?, ?, ?,?,?,?,?,?)");
-    $stmt->execute(array($username, $email, sha1($password), $role, $referal, $cash, $last_access, $avatar, $created_when));
-  }
+	$role = 1;
+	$referal = "";
+	$cash = 0;
+	$last_access = date("Y-m-d H:i:s");
+	$created_when = date("Y-m-d H:i:s");
+	$avatar = "http://heintendsvictory.org/wp-content/uploads/default-avatar.png";
 
-  function isLoginCorrect($email, $password) {
-    global $conn;
-    $stmt = $conn->prepare("SELECT * 
+	$stmt = $conn->prepare("INSERT INTO \"User\" (name,email,password,ROLE,referral,cash,last_acess,avatar,created_when) VALUES (?, ?, ?, ?,?,?,?,?,?)");
+	$stmt->execute(array(
+		$username,
+		$email,
+		sha1($password),
+		$role,
+		$referal,
+		$cash,
+		$last_access,
+		$avatar,
+		$created_when
+	));
+}
+
+function isLoginCorrect($email, $password)
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT *
                             FROM \"User\"
                             WHERE email = ? AND password = ?");
-    $stmt->execute(array($email, sha1($password)));
-    return $stmt->fetch();
-  }
+	$stmt->execute(array($email, sha1($password)));
 
-    function getUserById($id){
-        global $conn;
-        $stmt = $conn->prepare("SELECT *
+	return $stmt->fetch();
+}
+
+function getUserById($id)
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT *
                             FROM \"User\"
                             WHERE id = $id");
-        $stmt->execute();
-        return $stmt->fetch();
-    }
-?>
+	$stmt->execute();
+
+	return $stmt->fetch();
+}
+
+function getAllUsers()
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT * FROM \"User\"");
+	$stmt->execute();
+
+	return $stmt->fetchAll();
+}
+
+function deleteUserId($id)
+{
+	global $conn;
+
+	$stmt = $conn->prepare("SELECT * FROM Content where user_id = ?");
+	$stmt->execute(array($id));
+	$contents = $stmt->fetchAll();
+
+	foreach ($contents as $content)
+	{
+		if ($content['content_type'] == 1)
+		{
+			$stmt = $conn->prepare("DELETE FROM Question where id = ?");
+			$stmt->execute(array($content['table_id']));
+		}
+
+		$stmt = $conn->prepare("DELETE FROM Reply where content_id = ?");
+		$stmt->execute(array($content['id']));
+
+
+		$stmt = $conn->prepare("DELETE FROM Content where id = ?");
+		$stmt->execute(array($content['id']));
+	}
+
+	$stmt = $conn->prepare("DELETE FROM \"User\" where id = ?");
+	$stmt->execute(array($id));
+
+}

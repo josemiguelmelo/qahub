@@ -21,6 +21,17 @@ function createQuestion($title, $tags, $question, $priority) {
     $stmt->execute(array($_SESSION['user']['id'], $created_when, $questionId, 1));
 }
 
+function deleteQuestion($id)
+{
+	global $conn;
+
+	$stmt = $conn->prepare("DELETE FROM Content where content_type = 1 AND table_id = ?");
+	$stmt->execute(array($id));
+
+	$stmt = $conn->prepare("DELETE FROM Question where id = ? ");
+	$stmt->execute(array($id));
+}
+
 function insertAnswer($content, $questionId){
     global $conn;
 

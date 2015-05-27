@@ -4,20 +4,26 @@
  * Answer -> 2
  * Comment -> 3
  * */
-function vote($contentId, $classification) {
-    global $conn;
+function vote($contentId, $classification)
+{
+	global $conn;
 
-    try {
-        $stmt = $conn->prepare("DELETE FROM vote WHERE user_id = ? AND content_id = ?");
-        $stmt->execute(array($_SESSION['user']['id'], $contentId));
+	try
+	{
+		$stmt = $conn->prepare("DELETE FROM vote WHERE user_id = ? AND content_id = ?");
+		$stmt->execute(array($_SESSION['user']['id'], $contentId));
 
-        $stmt = $conn->prepare("INSERT INTO vote (user_id, content_id, classification) VALUES (?, ?, ?)");
-        $stmt->execute(array($_SESSION['user']['id'], $contentId, $classification));
-    }catch(PDOException $e){
-        http_response_code (400);
-        return ['error'=>true];
-    }
-    return getSumVotes($contentId);
+		$stmt = $conn->prepare("INSERT INTO vote (user_id, content_id, classification) VALUES (?, ?, ?)");
+		$stmt->execute(array($_SESSION['user']['id'], $contentId, $classification));
+	}
+	catch (PDOException $e)
+	{
+		http_response_code(400);
+
+		return ['error' => true];
+	}
+
+	return getSumVotes($contentId);
 }
 
 function getSumVotes($contentId){

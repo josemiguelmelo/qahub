@@ -1,6 +1,7 @@
 {include file='common/header.tpl'}
 {include file='common/navigation.tpl'}
 
+
 <!-- Main Wrapper -->
 <div id="wrapper">
 
@@ -8,9 +9,9 @@
         <div class="hpanel">
             <div class="panel-body">
                 <h2 class="font-light m-b-xs">
-                    Questions
+                    All questions
                 </h2>
-                <small>{$subtitle}</small>
+                <small>Here you can manage all questions.</small>
             </div>
         </div>
     </div>
@@ -35,6 +36,14 @@
                                         </p>
                                     </div>
                                     <div class="panel-footer">
+                                        <div class="row">
+                                            <div class="col col-lg-2">
+                                                <form action="{$BASE_URL}actions/questions/delete.php" id="deleteQuestion" method="post">
+                                                    <input type="hidden" value={$question.id} name="id" id="id">
+                                                    <button class="btn-sm btn btn-danger btn-block">Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
 
                                     </div>
                                 </div>
