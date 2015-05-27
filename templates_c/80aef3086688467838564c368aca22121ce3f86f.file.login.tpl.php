@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.15, created on 2015-05-26 15:49:21
+<?php /* Smarty version Smarty-3.1.15, created on 2015-05-27 13:12:03
          compiled from "/opt/lbaw/lbaw1461/public_html/rui/templates/users/login.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:24195428755647421845149-32137390%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '80aef3086688467838564c368aca22121ce3f86f' => 
     array (
       0 => '/opt/lbaw/lbaw1461/public_html/rui/templates/users/login.tpl',
-      1 => 1432648114,
+      1 => 1432650332,
       2 => 'file',
     ),
   ),
