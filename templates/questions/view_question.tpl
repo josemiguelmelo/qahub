@@ -21,6 +21,7 @@
                 <span class="fa fa-thumbs-o-up" data-id="{$question.question.contentid}" data-value="1"></span>
                 <p>{$question.questionVotes}</p>
                 <span class="fa fa-thumbs-o-down" data-id="{$question.question.contentid}" data-value="-1"></span>
+
             </div>
             <div class="col-lg-11 col-xs-10">
                 <div class="hpanel hblue">
@@ -42,7 +43,33 @@
                     </div>
                     <div class="panel-footer">
                         <div class="social-form">
-                            <input class="form-control" placeholder="Your comment">
+                            <form action="{$BASE_URL}actions/comments/add_comment.php" id="addCommentForm" method="post">
+                               
+                                {foreach from=$question.question.comments item=comment}
+                                
+                                <div class="social-talk">
+                                    <div class="media social-profile clearfix">
+                                        <a class="pull-left">
+                                            <img src="{$comment.avatar}" alt="profile-picture">
+                                        </a>
+
+                                        <div class="media-body">
+                                            <span class="font-bold">{$comment.name}</span>
+                                            <small class="text-muted">{$comment.created_when}</small>
+
+                                            <div class="social-content">
+                                                {$comment.content}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                {/foreach}
+                                
+                                
+                                <input hidden="true" name="questionId" value="{$question.question.questionid}"/>
+                                <input name="commentContent" class="form-control comment" placeholder="Your comment">
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -77,10 +104,36 @@
                             <div class="social-content m-t-md">
                                 {$answer.content}
                             </div>
+
                         </div>
                         <div class="panel-footer">
                             <div class="social-form">
-                                <input class="form-control" placeholder="Your comment">
+                                <form action="{$BASE_URL}actions/comments/add_comment.php" id="addCommentForm" method="post">
+                                    {foreach from=$answer.comments item=comment}
+                                
+                                        <div class="social-talk">
+                                            <div class="media social-profile clearfix">
+                                                <a class="pull-left">
+                                                    <img src="{$comment.avatar}" alt="profile-picture">
+                                                </a>
+        
+                                                <div class="media-body">
+                                                    <span class="font-bold">{$comment.name}</span>
+                                                    <small class="text-muted">{$comment.created_when}</small>
+        
+                                                    <div class="social-content">
+                                                        {$comment.content}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                    {/foreach}
+                                    
+                                    
+                                    <input hidden="true" name="answerId" value="{$answer.contentid}"/>
+                                    <input name="commentContent" class="form-control comment" placeholder="Your comment">
+                                </form>
                             </div>
                         </div>
                     </div>
