@@ -10,6 +10,7 @@
 
 <!-- App scripts -->
 <script src="{$BASE_URL}/javascript/qahub.js"></script>
+<script src="{$BASE_URL}/javascript/comments.js"></script>
 
     </body>
 </html>

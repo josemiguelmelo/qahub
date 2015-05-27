@@ -46,8 +46,7 @@ function insertAnswer($content, $questionId){
     $contentReplyId = $stmt->fetch()['id'];
 
 
-    $stmt = $conn->prepare("SELECT content.id
-                            FROM content, question WHERE question.id = $questionId AND content.table_id = question.id");
+    $stmt = $conn->prepare("SELECT content.id FROM content, question WHERE question.id = $questionId AND content.table_id = question.id");
     $stmt->execute();
     $contentId = $stmt->fetch();
 
@@ -59,8 +58,7 @@ function insertAnswer($content, $questionId){
 
 function getAllQuestions() {
     global $conn;
-    $stmt = $conn->prepare("SELECT content.created_when, question.id, question.title, question.content, question.priority
-                            FROM content, question WHERE content.content_type = 1 AND content.table_id = question.id");
+    $stmt = $conn->prepare("SELECT content.created_when, question.id, question.title, question.content, question.priority FROM content, question WHERE content.content_type = 1 AND content.table_id = question.id");
     $stmt->execute();
     return $stmt->fetchAll();
 
@@ -115,11 +113,41 @@ function getQuestionById($id){
             }
         }
     }
-
-
+    
+    $question_comments = getQuestionComments($contentid);
+    $question['comments'] = $question_comments;
+    
+    getAnswersComments($answers);
+    
     return [
         'question' => $question,
         'answers' => $answers,
         'questionVotes' => $questionVotes['classification'],
     ];
+}
+
+function getQuestionComments($contentid) {
+    global $conn;
+    
+    $stmt = $conn->prepare("SELECT \"User\".*, content.id as contentId, content.created_when, content.user_id, comment.content
+                            FROM content, comment, reply, \"User\" WHERE content.content_type = 3 AND content.table_id = comment.id AND reply.content_id = $contentid AND reply.reply_id = content.id AND \"User\".id = content.user_id");
+    $stmt->execute();
+    $comments =  $stmt->fetchAll();
+    
+    return $comments;
+}
+
+function getAnswersComments(&$answers) {
+    global $conn;
+    
+    foreach($answers as &$answer) {
+        $contentid = $answer['contentid'];
+        
+        $stmt = $conn->prepare("SELECT \"User\".*, content.id as contentId, content.created_when, content.user_id, comment.content
+                            FROM content, comment, reply, \"User\" WHERE content.content_type = 3 AND content.table_id = comment.id AND reply.content_id = $contentid AND reply.reply_id = content.id AND \"User\".id = content.user_id");
+        $stmt->execute();
+        $comments =  $stmt->fetchAll();
+ 
+        $answer['comments'] = $comments;
+    }
 }
