@@ -1,50 +1,5 @@
 {include file='common/header.tpl'}
-
-<!-- Header -->
-<div id="header">
-    <a href="index.html">
-        <div id="logo" class="light-version">
-            <span>
-                QAHub
-            </span>
-        </div>
-    </a>
-    <nav role="navigation">
-        <div class="header-link hide-menu"><i class="fa fa-bars"></i></div>
-        <div class="small-logo">
-            <span class="text-primary">QAHub</span>
-        </div>
-
-    </nav>
-</div>
-
-<!-- Navigation -->
-<aside id="menu">
-    <div id="navigation">
-
-        <div class="profile-picture">
-            <a href="#profile">
-                <img src="images/profile.jpg" class="img-circle m-b" alt="logo">
-
-                <div class="stats-label text-color">
-                    <span class="font-extra-bold font-uppercase">Tiago Ferreira</span>
-                </div>
-            </a>
-        </div>
-
-        <ul class="nav" id="side-menu">
-            <li class="active">
-                <a href="#"> <span class="nav-label">Ask a Question</span></a>
-            </li>
-            <li>
-                <a href="#"> <span class="nav-label">Your Questions</span></a>
-            </li>
-            <li>
-                <a href="#"> <span class="nav-label">Logout</span></a>
-            </li>
-        </ul>
-    </div>
-</aside>
+{include file='common/navigation.tpl'}
 
 <!-- Main Wrapper -->
 <div id="wrapper">
@@ -70,36 +25,36 @@
 
                     <div class="hpanel">
                         <div class="panel-body">
-                            <form action="register.html#" id="loginForm">
+                            <form action="{$BASE_URL}actions/users/perfil_edit.php" method="POST" id="profileForm" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="form-group col-lg-12">
                                         <label>Name</label>
-                                        <input type="" value="" id="" class="form-control" name=""
-                                               placeholder="Tiago Ferreira">
+                                        <input type="" value="{$smarty.session.user.name}" id="" class="form-control" name="name"
+                                               >
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <label>Password</label>
-                                        <input type="password" value="" id="" class="form-control" name=""
+                                        <input type="password" value="" id="" class="form-control" name="password"
                                                placeholder="Fill only if you want to change your password">
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <label>Repeat Password</label>
-                                        <input type="password" value="" id="" class="form-control" name=""
+                                        <input type="password" value="" id="" class="form-control" name="password_confirmation"
                                                placeholder="Make sure to match the password field">
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <label>Email Address</label>
-                                        <input type="" value="" id="" class="form-control" name=""
-                                               placeholder="tiagommferreira@gmail.com">
+                                        <input type="" value="{$smarty.session.user.email}" id="" class="form-control" name="email"
+                                              >
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <label>Repeat Email Address</label>
-                                        <input type="" value="" id="" class="form-control" name=""
-                                               placeholder="tiagommferreira@gmail.com">
+                                        <input type="" value="{$smarty.session.user.email}" id="" class="form-control" name="email_confirmation"
+                                               >
                                     </div>
                                     <div class="form-group col-lg-6">
                                         <label>Upload a different photo</label>
-                                        <input type="file" value="" id="" class="form-control" photo="">
+                                        <input type="file" class="form-control" name="avatar">
                                     </div>
                                     <div class="text-center">
                                         <button class="btn btn-success submit-changes">Submit Changes</button>
