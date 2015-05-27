@@ -97,7 +97,7 @@
                         <div class="panel-body">
                             <div class="media social-profile clearfix">
                                 <a class="pull-left">
-                                    <img src="{$question.question.avatar}" alt="profile-picture">
+                                    <img src="{$answer.avatar}" alt="profile-picture">
                                 </a>
 
                                 <div class="media-body">
