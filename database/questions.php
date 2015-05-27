@@ -139,11 +139,13 @@ function getQuestionById($id){
 }
 
 
-function closeQuestion($questionId){
+function closeQuestion($questionId)
+{
     global $conn;
-        $stmt = $conn->prepare("UPDATE question
+    $stmt = $conn->prepare("UPDATE question
                             SET closed = TRUE WHERE question.id = ?");
-        $stmt->execute(array($questionId));
+    $stmt->execute(array($questionId));
+}
 
 
 function search($content)
