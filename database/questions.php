@@ -21,6 +21,14 @@ function createQuestion($title, $tags, $question, $priority) {
     $stmt->execute(array($_SESSION['user']['id'], $created_when, $questionId, 1));
 }
 
+function editQuestion($title, $tags, $question, $priority, $id) {
+    global $conn;
+
+    $stmt = $conn->prepare("UPDATE question SET title = ?,content = ?,priority = ? WHERE question.id = $id");
+    $stmt->execute(array($title, $question, $priority));
+
+}
+
 function deleteQuestion($id)
 {
 	global $conn;
