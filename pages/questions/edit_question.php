@@ -1,5 +1,9 @@
 <?php
 include_once('../../config/init.php');
+include_once($BASE_DIR .'database/questions.php');
 
-$smarty->display('questions/manage_question.tpl');
+$question = getQuestionById($_GET['id']);
+$smarty->assign('question', $question);
+
+$smarty->display('questions/edit_question.tpl');
 

@@ -12,6 +12,7 @@
         </div>
     </div>
 </div>
+
 <div class="content">
     <form action="{$BASE_URL}actions/questions/edit.php" id="editQuestionForm" method="post">
         <div class="row">
@@ -30,7 +31,6 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-12">
-                                {$question.tags|@print_r}
                                 <input type="text" class="form-control" id="tags" name="tags" data-role="tagsinput" placeholder="Tags" value={$question.tags}>
                             </div>
                         </div>

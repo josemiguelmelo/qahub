@@ -7,7 +7,6 @@ $question = getQuestionById($_GET['id']);
 $favourite = isFavouriteQuestionOfUser($_SESSION['user']['id'], $question['question']['questionid']);
 
 
-
 $smarty->assign('question', $question);
 $smarty->assign('favourite', $favourite);
 

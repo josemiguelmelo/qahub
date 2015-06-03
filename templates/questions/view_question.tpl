@@ -21,6 +21,8 @@
         </div>
     </div>
 
+    {$question.question|print_r}
+
     <div class="content animated zoomIn">
         <div class="row social-board">
             <div class="col-lg-1 col-xs-2 vote-thumbs">
@@ -42,11 +44,9 @@
                                 <small class="text-muted">{date('j.m.Y', strtotime($question.question.created_when))} </small>
                             </div>
                         </div>
-
                         <div id="question-content" class="social-content m-t-md">
                             {nl2br($question.question.content)}
                         </div>
-
                     </div>
                     <div class="panel-footer">
                         <div class="social-form">

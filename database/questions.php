@@ -207,11 +207,11 @@ function getQuestionById($id){
             }
         }
 
-        $question_comments = getQuestionComments($contentid);
-        $question['comments'] = $question_comments;
-
-        getAnswersComments($answers);
     }
+    $question_comments = getQuestionComments($contentid);
+    $question['comments'] = $question_comments;
+
+    getAnswersComments($answers);
 
     //get question tags
     $tags = getQuestionTags($question['questionid']);
