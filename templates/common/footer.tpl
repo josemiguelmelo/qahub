@@ -22,6 +22,8 @@
 
 <script src="{$BASE_URL}/javascript/messages.js"></script>
 <script src="{$BASE_URL}/javascript/favouritequestion.js"></script>
+<script src="{$BASE_URL}/javascript/bootstrap-tagsinput.js"></script>
+
 
 </body>
 </html>

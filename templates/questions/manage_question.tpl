@@ -29,7 +29,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" id="tags" name="tags"  placeholder="Tags">
+                                    <input type="text" class="form-control" id="tags" name="tags" data-role="tagsinput" placeholder="Tags">
                                 </div>
                             </div>
                         </div>

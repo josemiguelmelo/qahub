@@ -4,7 +4,8 @@
  * Answer -> 2
  * Comment -> 3
  * */
-function createQuestion($title, $tags, $question, $priority) {
+function createQuestion($title, $tags, $question, $priority)
+{
     global $conn;
 
     $stmt = $conn->prepare("INSERT INTO question (title,content,priority) VALUES (?, ?, ?)");
@@ -19,11 +20,74 @@ function createQuestion($title, $tags, $question, $priority) {
 
     $stmt = $conn->prepare("INSERT INTO content (user_id, created_when, table_id, content_type) VALUES (?, ?, ?,?)");
     $stmt->execute(array($_SESSION['user']['id'], $created_when, $questionId, 1));
+
+    //add tags
+    $tags_array = explode(",", $tags);
+
+    foreach ($tags_array as $tag) {
+        $tag_id = insertTag($tag);
+        insertQuestionTag($questionId,$tag_id);
+    }
+
+}
+
+function insertQuestionTag($questionId, $tag_id) {
+    global $conn;
+
+    $stmt = $conn->prepare("INSERT INTO contenttag (content_id, tag_id) VALUES (?, ?)");
+    $stmt->execute(array($questionId, $tag_id));
+}
+
+function insertTag($tag)
+{
+    global $conn;
+
+    $stmt = $conn->prepare("SELECT id FROM tag WHERE name = ?");
+    $stmt->execute(array($tag));
+
+    $tag_id = $stmt->fetch();
+
+    if(!$tag_id) {
+        $stmt = $conn->prepare("INSERT INTO tag (name) VALUES (?) RETURNING id");
+        $stmt->execute(array($tag));
+        $tag_id = $stmt->fetch();
+    }
+
+    return $tag_id['id'];
+
+}
+
+function editQuestion($title, $tags, $question, $priority, $id)
+{
+    global $conn;
+
+    removeQuestionTags($id);
+
+    //add tags
+    $tags_array = explode(",", $tags);
+    foreach ($tags_array as $tag) {
+        $tag_id = insertTag($tag);
+        insertQuestionTag($id,$tag_id);
+    }
+
+    $stmt = $conn->prepare("UPDATE question SET title = ?,content = ?,priority = ? WHERE question.id = $id");
+    $stmt->execute(array($title, $question, $priority));
+
+}
+
+function removeQuestionTags($id) {
+    global $conn;
+
+    $stmt = $conn->prepare("DELETE FROM contenttag WHERE content_id = ?");
+    $stmt->execute(array($id));
 }
 
 function deleteQuestion($id)
 {
-	global $conn;
+    global $conn;
+    removeQuestionTags($id);
+    $stmt = $conn->prepare("DELETE FROM Content where content_type = 1 AND table_id = ?");
+    $stmt->execute(array($id));
 
 	$stmt = $conn->prepare("DELETE FROM Content where content_type = 1 AND table_id = ?");
 	$stmt->execute(array($id));
@@ -36,7 +100,8 @@ function deleteQuestion($id)
     $stmt->execute(array($id));
 }
 
-function insertAnswer($content, $questionId){
+function insertAnswer($content, $questionId)
+{
     global $conn;
 
     $stmt = $conn->prepare("INSERT INTO answer (content) VALUES (?)");
@@ -71,7 +136,8 @@ function insertAnswer($content, $questionId){
 
 }
 
-function getAllQuestions() {
+function getAllQuestions()
+{
     global $conn;
     $stmt = $conn->prepare("SELECT content.created_when, question.id, question.title, question.content, question.priority FROM content, question WHERE content.content_type = 1 AND content.table_id = question.id");
     $stmt->execute();
@@ -82,7 +148,8 @@ function getAllQuestions() {
 
 }
 
-function getAllUserQuestions($user_id) {
+function getAllUserQuestions($user_id)
+{
     global $conn;
     $stmt = $conn->prepare("SELECT content.created_when, question.id, question.title, question.content, question.priority, question.closed
                             FROM content, question WHERE content.content_type = 1 AND content.table_id = question.id AND content.user_id = ?");
@@ -142,19 +209,41 @@ function getQuestionById($id){
 
         $question_comments = getQuestionComments($contentid);
         $question['comments'] = $question_comments;
-    
+
         getAnswersComments($answers);
     }
-    
-    
-    
+
+    //get question tags
+    $tags = getQuestionTags($question['questionid']);
+
     return [
         'question' => $question,
+        'tags'  => $tags,
         'answers' => $answers,
         'questionVotes' => $questionVotes['classification'],
     ];
 }
 
+function getQuestionTags($questionId) {
+    global $conn;
+
+    $stmt = $conn->prepare("SELECT tag.name FROM tag, contenttag WHERE contenttag.content_id = ? AND tag.id = contenttag.tag_id");
+    $stmt->execute(array($questionId));
+
+    $tags_array = $stmt->fetchAll();
+
+    $tags_string = "";
+
+    for($i = 0; $i < sizeof($tags_array); $i++) {
+        if($i != 0) {
+            $tags_string = $tags_string . ",";
+        }
+
+        $tags_string = $tags_string . $tags_array[$i]['name'];
+    }
+
+    return $tags_string;
+}
 
 function closeQuestion($questionId)
 {

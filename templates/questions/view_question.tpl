@@ -21,7 +21,6 @@
         </div>
     </div>
 
-
     <div class="content animated zoomIn">
         <div class="row social-board">
             <div class="col-lg-1 col-xs-2 vote-thumbs">
@@ -144,8 +143,9 @@
                                     {/foreach}
 
                                     {if isset($smarty.session.user) }
-                                    <input hidden="true" name="answerId" value="{$answer.contentid}"/>
-                                    <input name="commentContent" class="form-control comment" placeholder="Your comment">
+                                        <input hidden="true" name="questionId" value="{$question.question.questionid}"/>
+                                        <input hidden="true" name="answerId" value="{$answer.contentid}"/>
+                                        <input name="commentContent" class="form-control comment" placeholder="Your comment">
                                     {/if}
                                 </form>
                             </div>

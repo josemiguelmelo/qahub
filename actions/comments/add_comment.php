@@ -14,13 +14,12 @@ if (!$_POST['commentContent']) {
 $comment = $_POST['commentContent'];
 
 try{
-    if($_POST['questionId']) {
-        $questionId = $_POST['questionId'];
-        insertComment($comment, $questionId, 1);
-    }
-    else if($_POST['answerId']) {
+    if($_POST['answerId']) {
         $answerId = $_POST['answerId'];
         insertComment($comment, $answerId, 2);
+    } else if($_POST['questionId']) {
+        $questionId = $_POST['questionId'];
+        insertComment($comment, $questionId, 1);
     }
 
 } catch (PDOException $e) {
@@ -28,10 +27,10 @@ try{
     $_SESSION['error_messages'][] = 'Error adding comment';
 
     $_SESSION['form_values'] = $_POST;
-    header("Location: $BASE_URL" . 'pages/questions/create_question.php');
+    header("Location: $BASE_URL" . 'pages/questions/view_question.php?id=' . $_POST['questionId']);
     exit;
 }
 $_SESSION['success_messages'][] = 'Comment added successfully';
-header("Location: " . $BASE_URL. 'pages/questions/view_questions.php');
+header("Location: " . $BASE_URL. 'pages/questions/view_question.php?id=' . $_POST['questionId']);
 
 ?>

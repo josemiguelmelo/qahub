@@ -32,7 +32,10 @@
                                     </div>
                                     <div class="panel-footer">
                                         {if $question.closed === false}
+                                            <a class="btn btn-success btn-sm" href="{$BASE_URL}pages/questions/edit_question.php?id={$question.id}">Edit</a>
                                             <a class="btn btn-danger btn-sm" href="{$BASE_URL}actions/questions/close.php?id={$question.id}">Close</a>
+                                        {else}
+                                            Question closed.
                                         {/if}
                                     </div>
                                 </div>

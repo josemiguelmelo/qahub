@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{$BASE_URL}vendor/metisMenu/dist/metisMenu.css" />
     <link rel="stylesheet" href="{$BASE_URL}vendor/animate.css/animate.css" />
     <link rel="stylesheet" href="{$BASE_URL}vendor/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="{$BASE_URL}css/bootstrap-tagsinput.css" />
 
     <!-- App styles -->
     <link rel="stylesheet" href="{$BASE_URL}css/pe-icon-7-stroke.css" />
