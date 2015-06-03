@@ -5,8 +5,18 @@
         <div class="hpanel">
             <div class="panel-body">
                 <h2 class="font-light m-b-xs">
-                    {$question.question.title}
+
+                    <div class="row">
+                        <div class="col-md-11">
+                            {$question.question.title}
+                        </div>
+                        <div class="col-md-1">
+                            <i id="setFavouriteQuestion" data-id="{$question.question.questionid}" {if count($favourite) == 0} class="fa fa-star-o" data-value="0" {else} class="fa fa-star" data-value="1" {/if}></i>
+                        </div>
+                    </div>
                 </h2>
+
+
             </div>
         </div>
     </div>

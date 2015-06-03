@@ -20,6 +20,8 @@
 
 <script src="{$BASE_URL}/javascript/comments.js"></script>
 
+<script src="{$BASE_URL}/javascript/favouritequestion.js"></script>
+
 
 </body>
 </html>

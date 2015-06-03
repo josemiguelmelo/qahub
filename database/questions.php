@@ -36,8 +36,12 @@ function deleteQuestion($id)
 	$stmt = $conn->prepare("DELETE FROM Content where content_type = 1 AND table_id = ?");
 	$stmt->execute(array($id));
 
-	$stmt = $conn->prepare("DELETE FROM Question where id = ? ");
-	$stmt->execute(array($id));
+    $stmt = $conn->prepare("DELETE FROM Question where id = ? ");
+    $stmt->execute(array($id));
+
+
+    $stmt = $conn->prepare("DELETE FROM favouritequestions where question_id = ? ");
+    $stmt->execute(array($id));
 }
 
 function insertAnswer($content, $questionId){
@@ -80,6 +84,8 @@ function getAllQuestions() {
     $stmt = $conn->prepare("SELECT content.created_when, question.id, question.title, question.content, question.priority FROM content, question WHERE content.content_type = 1 AND content.table_id = question.id");
     $stmt->execute();
     return $stmt->fetchAll();
+
+
 
 
 }
@@ -201,5 +207,57 @@ function getAnswersComments(&$answers) {
  
         $answer['comments'] = $comments;
     }
+}
+
+function getFavouriteQuestionsOfUser($userId) {
+    global $conn;
+
+    $stmt = $conn->prepare("SELECT \"User\".*, content.id as contentId, content.created_when, question.id as questionId, question.content
+                            FROM favouritequestions, content, question, \"User\" WHERE content.content_type = 1 AND content.table_id = question.id AND favouritequestions.user_id = ? AND content.table_id = favouritequestions.question_id");
+    $stmt->execute(array($userId));
+    $favouriteQuestions =  $stmt->fetchAll();
+
+    return $favouriteQuestions;
+}
+
+function isFavouriteQuestionOfUser($userId, $questionId)
+{
+    global $conn;
+
+    $stmt = $conn->prepare("SELECT *
+                            FROM favouritequestions WHERE favouritequestions.user_id = ? AND favouritequestions.question_id = ?");
+    $stmt->execute(array($userId, $questionId));
+    $favouriteQuestions =  $stmt->fetchAll();
+
+    return $favouriteQuestions;
+}
+
+function removeFavourite($userId, $questionId)
+{
+    global $conn;
+
+    $stmt = $conn->prepare("DELETE FROM favouritequestions where question_id = ? AND user_id = ?");
+    $stmt->execute(array($questionId, $userId));
+}
+
+function setAsFavourite($userId, $questionId, $value) {
+    global $conn;
+
+    try {
+        if (count(isFavouriteQuestionOfUser($userId, $questionId)) != 0) {
+            removeFavourite($userId, $questionId);
+            $value = 0;
+        } else {
+            $stmt = $conn->prepare("INSERT INTO favouritequestions (user_id, question_id) VALUES (?, ?)");
+            $stmt->execute(array($userId, $questionId));
+            $value = 1;
+        }
+    }catch (PDOException $e) {
+        http_response_code(400);
+
+        return ['error' => true];
+    }
+
+	return ['error' => false, 'value' => $value ];
 }
 
