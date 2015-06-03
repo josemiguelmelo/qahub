@@ -16,6 +16,7 @@
                 <input type="text" placeholder="Search something special" class="form-control" name="search">
             </div>
         </form>
+
     </nav>
 </div>
 
@@ -60,8 +61,12 @@
                     <a href="{$BASE_URL}pages/questions/view_your_favourite_questions.php"> <span class="nav-label">Your Favourite Questions</span></a>
                 </li>
                 <li>
+                    <a href="{$BASE_URL}pages/users/messages.php"><span class="nav-label">Messages</span></a>
+                </li>
+                <li>
                     <a href="{$BASE_URL}actions/users/logout.php"> <span class="nav-label">Logout</span></a>
                 </li>
+
             </ul>
             {/if}
         {else}
