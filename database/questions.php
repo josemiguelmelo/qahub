@@ -21,14 +21,6 @@ function createQuestion($title, $tags, $question, $priority) {
     $stmt->execute(array($_SESSION['user']['id'], $created_when, $questionId, 1));
 }
 
-function editQuestion($title, $tags, $question, $priority, $id) {
-    global $conn;
-
-    $stmt = $conn->prepare("UPDATE question SET title = ?,content = ?,priority = ? WHERE question.id = $id");
-    $stmt->execute(array($title, $question, $priority));
-
-}
-
 function deleteQuestion($id)
 {
 	global $conn;
@@ -209,13 +201,17 @@ function getAnswersComments(&$answers) {
     }
 }
 
+
+
 function getFavouriteQuestionsOfUser($userId) {
     global $conn;
 
-    $stmt = $conn->prepare("SELECT \"User\".*, content.id as contentId, content.created_when, question.id as questionId, question.content
-                            FROM favouritequestions, content, question, \"User\" WHERE content.content_type = 1 AND content.table_id = question.id AND favouritequestions.user_id = ? AND content.table_id = favouritequestions.question_id");
+
+    $stmt = $conn->prepare("SELECT \"User\".id as userId,\"User\".name as userName, \"User\".email as userEmail  , content.id as contentId, content.created_when, question.id as questionId, question.content, question.title
+                            FROM favouritequestions, content, question, \"User\" WHERE content.content_type = 1 AND favouritequestions.user_id = ? AND question.id = favouritequestions.question_id AND content.table_id = question.id  AND \"User\".id = content.user_id");
     $stmt->execute(array($userId));
     $favouriteQuestions =  $stmt->fetchAll();
+
 
     return $favouriteQuestions;
 }
