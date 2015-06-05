@@ -325,10 +325,11 @@ function removeFavourite($userId, $questionId)
     $stmt->execute(array($questionId, $userId));
 }
 
-function setAsFavourite($userId, $questionId, $value) {
+function setAsFavourite($userId, $questionId) {
     global $conn;
 
     try {
+        // if already favourite, removes from favourites
         if (count(isFavouriteQuestionOfUser($userId, $questionId)) != 0) {
             removeFavourite($userId, $questionId);
             $value = 0;

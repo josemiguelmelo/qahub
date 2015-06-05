@@ -21,7 +21,6 @@
         </div>
     </div>
 
-    {$question.question|print_r}
 
     <div class="content animated zoomIn">
         <div class="row social-board">
