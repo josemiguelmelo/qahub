@@ -28,7 +28,7 @@
         {if isset($smarty.session.user) }
 
             <div class="profile-picture">
-                <a href="{$BASE_URL}pages/users/view_profile.php">
+                <a href="{$BASE_URL}pages/users/edit_profile.php">
                     <img src="{$smarty.session.user.avatar}" class="avatar img-circle m-b" alt="logo">
 
                     <div class="stats-label text-color">
