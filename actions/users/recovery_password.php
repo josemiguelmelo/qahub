@@ -63,6 +63,14 @@ catch (PDOException $e)
     header("Location: $BASE_URL".'pages/users/recovery_password.php');
     exit;
 }
+
+try{
+    $user = getUserByEmail($email);
+    addPasswordToHistory($user['id'], $password);
+} catch( PDOException $e) {
+    // TODO: error when adding password to history
+}
+
 $_SESSION['success_messages'][] = 'User password reset successfully';
 header("Location: $BASE_URL" . 'pages/users/login.php');
 ?>

@@ -46,6 +46,17 @@ function getUserById($id)
 	return $stmt->fetch();
 }
 
+function getUserByEmail($email)
+{
+    global $conn;
+    $queryArray = [$email];
+
+    $stmt = $conn->prepare("SELECT *
+                            FROM \"User\"
+                            WHERE email = ?");
+    $stmt->execute($queryArray);
+    return $stmt->fetch();
+}
 
 function updatePassword($email, $password)
 {
@@ -62,6 +73,28 @@ function updatePassword($email, $password)
 
 }
 
+
+function addPasswordToHistory($userId, $password){
+    global $conn;
+
+    $passwordHistoryQuery = "INSERT INTO passwordhistory (user_id, password) VALUES (? , ?)";
+    $passwordQueryArray = [$userId, sha1($password)];
+
+    $stmt = $conn->prepare($passwordHistoryQuery);
+    $stmt->execute($passwordQueryArray);
+}
+
+function getLastThreePasswords($userId){
+    global $conn;
+
+    $passwordHistoryQuery = "SELECT * FROM passwordhistory WHERE user_id = ? LIMIT 3";
+    $passwordQueryArray = [$userId];
+
+    $stmt = $conn->prepare($passwordHistoryQuery);
+    $stmt->execute($passwordQueryArray);
+    return $stmt->fetchAll();
+
+}
 
 function updateUser($userId, $name, $email, $password, $avatar)
 {
@@ -83,6 +116,8 @@ function updateUser($userId, $name, $email, $password, $avatar)
 	{
 		$query = $query.", password = ?";
 		$inputArray[] = sha1($password);
+
+
 	}
 	if ($avatar != "")
 	{

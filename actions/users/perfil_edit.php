@@ -25,6 +25,21 @@ if ($password != $password_confirmation) {
     exit;
 }
 
+// check if password different from last 3 passwords
+if($password != "")
+{
+    $lastThreePasswords = getLastThreePasswords($_SESSION['user']['id']);
+
+    foreach($lastThreePasswords as $lastPassword){
+        if($lastPassword['password'] == sha1($password)){
+            $_SESSION['error_messages'][] = 'Password must be different from last 3 passwords.';
+            $_SESSION['form_values'] = $_POST;
+            header("Location: $BASE_URL" . 'pages/users/view_profile.php');
+            exit;
+        }
+    }
+}
+
 if ($email != $email_confirmation) {
     $_SESSION['error_messages'][] = 'Email and email confirmation are not equal.';
     $_SESSION['form_values'] = $_POST;
@@ -80,6 +95,17 @@ try {
     header("Location: $BASE_URL" . 'pages/users/view_profile.php');
     exit;
 }
+
+try{
+    if($password != "")
+    {
+        addPasswordToHistory($_SESSION['user']['id'], $password);
+    }
+} catch (PDOException $e) {
+    // TODO: error adding password to history
+}
+
+
 
 $_SESSION['user'] = getUserById($userId);
 
