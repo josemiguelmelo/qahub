@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    var errors=0;
 
     $(".fa-trash").click(function () {
         var contentid = $(this).data("id");
@@ -25,7 +26,6 @@ $(document).ready(function() {
         var to_id = $("#to_email").val();
         var subject = $("#subject").val();
         var message = $("#message").val();
-
         console.log(to_id);
         console.log(subject);
         console.log(message);
@@ -44,8 +44,11 @@ $(document).ready(function() {
             },
             error: function (data, textStatus, jqXHR) {
                 console.log(data);
-                var errorDiv = $(".normalheader");
-                errorDiv.after("<div class='normalheader'> <div id='error_messages'><div class='alert alert-danger'>The destination user does not exists</div></div></div>");
+                if(errors==0) {
+                    var errorDiv = $(".normalheader");
+                    errorDiv.after("<div class='normalheader'> <div id='error_messages'><div class='alert alert-danger'>The destination user does not exists</div></div></div>");
+                    errors++;
+                }
             }
         });
     });
