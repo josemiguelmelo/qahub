@@ -50,7 +50,12 @@
                     <li>
                         <a href="{$BASE_URL}pages/users/messages.php"><span class="nav-label">Messages</span></a>
                     </li>
-
+                    <li>
+                        <a href="{$BASE_URL}actions/users/export.php"><span class="nav-label">Export Users</span></a>
+                    </li>
+                    <li>
+                        <a href="{$BASE_URL}actions/questions/export.php"><span class="nav-label">Export Questions</span></a>
+                    </li>
                     <li>
                         <a href="{$BASE_URL}actions/users/logout.php" > <span class="nav-label">Logout</span></a>
                     </li>
