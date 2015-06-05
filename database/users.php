@@ -181,3 +181,17 @@ function deleteUserId($id)
 	$stmt->execute(array($id));
 
 }
+
+function checkAdmin($id)
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT * FROM \"User\" where id = ?");
+	$stmt->execute(array($id));
+	$user = $stmt->fetch();
+	if($user['role'] == 2) {
+		return true;
+	} else {
+		return false;
+	}
+
+}

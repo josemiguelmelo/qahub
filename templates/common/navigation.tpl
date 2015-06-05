@@ -39,11 +39,18 @@
             {if $smarty.session.user.role eq 2} <!-- user is admin -->
                 <ul class="nav" id="side-menu">
                     <li>
+                        <a href="{$BASE_URL}actions/users/switch.php" > <span class="nav-label">Switch to Normal User</span></a>
+                    </li>
+                    <li>
                         <a href="{$BASE_URL}pages/questions/view_questions.php"> <span class="nav-label">See questions</span></a>
                     </li>
                     <li>
                         <a href="{$BASE_URL}pages/users/view_users.php"> <span class="nav-label">See users</span></a>
                     </li>
+                    <li>
+                        <a href="{$BASE_URL}pages/users/messages.php"><span class="nav-label">Messages</span></a>
+                    </li>
+
                     <li>
                         <a href="{$BASE_URL}actions/users/logout.php" > <span class="nav-label">Logout</span></a>
                     </li>
@@ -51,6 +58,11 @@
 
             {else} <!-- if it is a normal user -->
             <ul class="nav" id="side-menu">
+                {if $admin eq true}
+                    <li>
+                        <a href="{$BASE_URL}actions/users/switch_admin.php" > <span class="nav-label">Switch to Admin</span></a>
+                    </li>
+                {/if}
                 <li>
                     <a href="{$BASE_URL}pages/questions/create_question.php"> <span class="nav-label">Ask a Question</span></a>
                 </li>
@@ -63,6 +75,7 @@
                 <li>
                     <a href="{$BASE_URL}pages/users/messages.php"><span class="nav-label">Messages</span></a>
                 </li>
+
                 <li>
                     <a href="{$BASE_URL}actions/users/logout.php"> <span class="nav-label">Logout</span></a>
                 </li>
