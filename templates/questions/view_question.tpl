@@ -39,7 +39,7 @@
                             </a>
 
                             <div class="media-body">
-                                <h5>{$question.question.name}</h5>
+                                <h5><a href="{$BASE_URL}pages/users/view_profile.php?id={$question.question.id}">{$question.question.name}</a> </h5>
                                 <small class="text-muted">{date('j.m.Y', strtotime($question.question.created_when))} </small>
                                 </br>
                                 {foreach from=$question.tags_array item=tag}
@@ -65,7 +65,7 @@
                                         </a>
 
                                         <div class="media-body">
-                                            <span class="font-bold">{$comment.name}</span>
+                                            <span class="font-bold"><a href="{$BASE_URL}pages/users/view_profile.php?id={$comment.id}">{$comment.name}</a></span>
                                             <small class="text-muted">{$comment.created_when}</small>
 
                                             <div class="comment">
@@ -112,7 +112,7 @@
                                 </a>
 
                                 <div class="media-body">
-                                    <h5>{$answer.name}</h5>
+                                    <h5><a href="{$BASE_URL}pages/users/view_profile.php?id={$answer.id}">{$answer.name}</a></h5>
                                     <small class="text-muted">{date('j.m.Y', strtotime($answer.created_when))} </small>
                                 </div>
                             </div>
@@ -134,7 +134,7 @@
                                                 </a>
         
                                                 <div class="media-body">
-                                                    <span class="font-bold">{$comment.name}</span>
+                                                    <span class="font-bold"><a href="{$BASE_URL}pages/users/view_profile.php?id={$comment.id}">{$comment.name}</a></span>
                                                     <small class="text-muted">{$comment.created_when}</small>
         
                                                     <div class="comment">
