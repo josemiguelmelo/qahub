@@ -46,6 +46,23 @@ function getUserById($id)
 	return $stmt->fetch();
 }
 
+
+function updatePassword($email, $password)
+{
+    $inputArray = array();
+
+    $query = "UPDATE \"User\" SET password = ? WHERE email = ?";
+
+    $inputArray[] = $password;
+    $inputArray[] = $email;
+
+    global $conn;
+    $stmt = $conn->prepare($query);
+    $stmt->execute($inputArray);
+
+}
+
+
 function updateUser($userId, $name, $email, $password, $avatar)
 {
 

@@ -30,6 +30,7 @@
                         </div>
                         <button class="btn btn-success btn-block">Login</button>
                         <a class="btn btn-default btn-block" href="{$BASE_URL}pages/users/register.php">Register</a>
+                        <a class="btn btn-default btn-block" href="{$BASE_URL}pages/users/recovery_password.php">Forgot password?</a>
                     </form>
                 </div>
             </div>
