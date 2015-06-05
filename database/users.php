@@ -36,6 +36,64 @@ function isLoginCorrect($email, $password)
 	return $stmt->fetch();
 }
 
+function followUser($followerId, $userToFollowId)
+{
+    global $conn;
+
+    try
+    {
+        $stmt = $conn->prepare("INSERT INTO favouriteusers (user_id, favourite_id) VALUES (?, ?)");
+        $stmt->execute(array($followerId, $userToFollowId));
+    }
+    catch (PDOException $e)
+    {
+        http_response_code(400);
+
+        return ['error' => true];
+    }
+
+    return ['error'=>false, 'value'=>false];
+}
+
+function unfollowUser($followerId, $userFollowedId)
+{
+    global $conn;
+
+    try
+    {
+        $stmt = $conn->prepare("DELETE FROM favouriteusers WHERE user_id = ? AND favourite_id = ?");
+        $stmt->execute(array($followerId, $userFollowedId));
+    }
+    catch (PDOException $e)
+    {
+        http_response_code(400);
+
+
+
+        return ['error' => true];
+    }
+
+    return ['error' => false, 'value'=>true];
+}
+
+function isFollowing($followerId, $userFollowedId)
+{
+    global $conn;
+
+    $queryArray = [$followerId, $userFollowedId];
+
+    $stmt = $conn->prepare("SELECT *
+                            FROM favouriteusers
+                            WHERE user_id = ? AND favourite_id = ?");
+    $stmt->execute($queryArray);
+    $result = $stmt->fetchAll();
+
+    if(count($result) > 0){
+        return true;
+    }
+    return false;
+}
+
 function getUserById($id)
 {
 	global $conn;

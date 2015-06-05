@@ -28,7 +28,7 @@
                                 <div class="col-md-7">
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <span class="text-warning profile-title">Name: </span>
+                                            <span class="text-warning profile-title">Name </span>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -38,7 +38,7 @@
 
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <span class="text-warning profile-title">Email: </span>
+                                            <span class="text-warning profile-title">Email </span>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -48,7 +48,7 @@
 
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <span class="text-warning profile-title">Questions: </span>
+                                            <span class="text-warning profile-title">Questions </span>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -58,7 +58,7 @@
 
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <span class="text-warning profile-title">Badges: </span>
+                                            <span class="text-warning profile-title">Badges </span>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -68,7 +68,13 @@
 
                                 {if isset($smarty.session.user)}
                                     <div class="col-md-2">
-                                        <button class="btn btn-warning">Follow user</button>
+                                        <button id="followUser" data-id="{$user.id}" {if $user.followed == false} data-value="true" {else} data-value="false" {/if} class="btn btn-warning">
+                                            {if $user.followed == false}
+                                            Follow user
+                                            {else}
+                                            Unfollow user
+                                            {/if}
+                                        </button>
                                     </div>
                                 {/if}
 

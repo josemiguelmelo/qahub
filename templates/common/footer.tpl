@@ -24,6 +24,7 @@
 <script src="{$BASE_URL}/javascript/favouritequestion.js"></script>
 <script src="{$BASE_URL}/javascript/bootstrap-tagsinput.js"></script>
 <script src="{$BASE_URL}/javascript/questiontag.js"></script>
+<script src="{$BASE_URL}/javascript/followuser.js"></script>
 
 
 </body>

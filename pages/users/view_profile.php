@@ -8,6 +8,10 @@ $userId = $_GET['id'];
 $user = getUserById($userId);
 $userQuestions = getAllUserQuestions($userId);
 
+if( $_SESSION['user'] ) {
+    $isFollowing = isFollowing($_SESSION['user']['id'], $userId);
+    $user['followed'] = $isFollowing;
+}
 $user['questions'] = $userQuestions;
 
 $smarty->assign('user', $user);
