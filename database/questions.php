@@ -29,6 +29,22 @@ function createQuestion($title, $tags, $question, $priority)
         insertQuestionTag($questionId,$tag_id);
     }
 
+    addUserBadges($_SESSION['user']['id']);
+
+}
+
+function addUserBadges($user_id) {
+    global $conn;
+
+    $stmt = $conn->prepare("SELECT COUNT(id) as question_count FROM content WHERE content.content_type = 1 AND content.user_id = ?");
+    $stmt->execute(array($user_id));
+    $question_count = $stmt->fetch()['question_count'];
+
+    if($question_count == 3) {
+        $stmt = $conn->prepare("INSERT INTO userbadges (user_id,badge_id) VALUES(?,?)");
+        $stmt->execute(array($user_id,1));
+    }
+
 }
 
 function insertQuestionTag($questionId, $tag_id) {

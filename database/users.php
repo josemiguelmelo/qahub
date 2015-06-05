@@ -253,3 +253,13 @@ function checkAdmin($id)
 	}
 
 }
+
+
+function getUserBadges($id) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT badge.name
+                            FROM badge, userbadges
+                            WHERE badge.id = userbadges.badge_id AND userbadges.user_id = ?");
+    $stmt->execute(array($id));
+    return $stmt->fetchAll();
+}

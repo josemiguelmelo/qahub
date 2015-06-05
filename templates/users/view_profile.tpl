@@ -5,9 +5,9 @@
     <div class="hpanel">
         <div class="panel-body">
             <h2 class="font-light m-b-xs">
-                Edit your profile
+                Profile
             </h2>
-            <small>You can edit your private information.</small>
+            <small>User profile</small>
         </div>
     </div>
 </div>
@@ -25,7 +25,7 @@
                                 <div class="col-md-3">
                                     <img src="{$user.avatar}" class="img-circle profile-picture" alt="logo">
                                 </div>
-                                <div class="col-md-7">
+                                <div class="col-md-7    ">
                                     <div class="row">
                                         <div class="col-md-3">
                                             <span class="text-warning profile-title">Name </span>
@@ -62,7 +62,28 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class=col-md-6><span>Complete badges </span></div>
+                                        <div class=col-md-6>
+
+                                            <div class="table-responsive">
+                                                <table class="table table-striped">
+
+                                                    <tbody>
+
+                                                    {foreach from=$user.badges item=badge}
+                                                        <tr>
+                                                            <td>
+                                                                <span class="text-success font-bold">{$badge.name}</span>
+                                                            </td>
+                                                        </tr>
+                                                    {/foreach}
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+
+
+                                        </div>
                                     </div>
                                 </div>
 
@@ -84,6 +105,8 @@
                 </div>
             </div>
         </div>
+
+
     </div>
 </div>
 </div>
