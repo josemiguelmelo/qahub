@@ -215,10 +215,12 @@ function getQuestionById($id){
 
     //get question tags
     $tags = getQuestionTags($question['questionid']);
+    $tags_array = explode(",",$tags);
 
     return [
         'question' => $question,
         'tags'  => $tags,
+        'tags_array' => $tags_array,
         'answers' => $answers,
         'questionVotes' => $questionVotes['classification'],
     ];
@@ -347,3 +349,17 @@ function setAsFavourite($userId, $questionId) {
 	return ['error' => false, 'value' => $value ];
 }
 
+
+function getTagQuestions($tag) {
+    global $conn;
+
+
+    $stmt = $conn->prepare("SELECT \"User\".id as userId,\"User\".name as userName, \"User\".email as userEmail  , content.id as contentId, content.created_when, question.id as questionId, question.content, question.title
+                            FROM tag, contenttag, question, \"User\", content
+                            WHERE tag.name = ? AND contenttag.tag_id = tag.id AND question.id = contenttag.content_id AND content.content_type = 1 AND content.table_id = question.id AND \"User\".id = content.user_id");
+    $stmt->execute(array($tag));
+    $tagQuestions =  $stmt->fetchAll();
+
+
+    return $tagQuestions;
+}

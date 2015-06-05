@@ -41,6 +41,11 @@
                             <div class="media-body">
                                 <h5>{$question.question.name}</h5>
                                 <small class="text-muted">{date('j.m.Y', strtotime($question.question.created_when))} </small>
+                                </br>
+                                {foreach from=$question.tags_array item=tag}
+                                    <span class="tag label label-info questionTag">{$tag}</span>
+                                {/foreach}
+
                             </div>
                         </div>
                         <div id="question-content" class="social-content m-t-md">
