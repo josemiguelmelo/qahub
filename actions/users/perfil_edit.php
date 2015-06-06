@@ -8,7 +8,7 @@ checkIfLoggedIn();
 if (!$_POST['name'] || !$_POST['email'] || !$_POST['email_confirmation']) {
     $_SESSION['error_messages'][] = 'All fields are mandatory';
     $_SESSION['form_values'] = $_POST;
-    header("Location: $BASE_URL" . 'pages/users/view_profile.php');
+    header("Location: $BASE_URL" . 'pages/users/edit_profile.php');
     exit;
 }
 
@@ -21,7 +21,7 @@ $email_confirmation = $_POST['email_confirmation'];
 if ($password != $password_confirmation) {
     $_SESSION['error_messages'][] = 'Password and password confirmation are not equal.';
     $_SESSION['form_values'] = $_POST;
-    header("Location: $BASE_URL" . 'pages/users/view_profile.php');
+    header("Location: $BASE_URL" . 'pages/users/edit_profile.php');
     exit;
 }
 
@@ -34,7 +34,7 @@ if($password != "")
         if($lastPassword['password'] == sha1($password)){
             $_SESSION['error_messages'][] = 'Password must be different from last 3 passwords.';
             $_SESSION['form_values'] = $_POST;
-            header("Location: $BASE_URL" . 'pages/users/view_profile.php');
+            header("Location: $BASE_URL" . 'pages/users/edit_profile.php');
             exit;
         }
     }
@@ -43,7 +43,7 @@ if($password != "")
 if ($email != $email_confirmation) {
     $_SESSION['error_messages'][] = 'Email and email confirmation are not equal.';
     $_SESSION['form_values'] = $_POST;
-    header("Location: $BASE_URL" . 'pages/users/view_profile.php');
+    header("Location: $BASE_URL" . 'pages/users/edit_profile.php');
     exit;
 }
 
@@ -92,7 +92,7 @@ try {
     else $_SESSION['error_messages'][] = 'Error updating user';
 
     $_SESSION['form_values'] = $_POST;
-    header("Location: $BASE_URL" . 'pages/users/view_profile.php');
+    header("Location: $BASE_URL" . 'pages/users/edit_profile.php');
     exit;
 }
 
@@ -110,4 +110,4 @@ try{
 $_SESSION['user'] = getUserById($userId);
 
 $_SESSION['success_messages'][] = 'User profile updated successfully';
-header("Location: $BASE_URL" . 'pages/users/view_profile.php');
+header("Location: $BASE_URL" . 'pages/users/edit_profile.php');

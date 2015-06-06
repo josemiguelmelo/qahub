@@ -24,12 +24,12 @@
                         <div class="panel-body form-horizontal">
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+                                    <input type="text" class="form-control" id="title" name="title" placeholder="Title" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" id="tags" name="tags" data-role="tagsinput" placeholder="Tags">
+                                    <input type="text" class="form-control" id="tags" name="tags" data-role="tagsinput" required placeholder="Tags">
                                 </div>
                             </div>
                         </div>
@@ -43,7 +43,7 @@
                             Question
                         </div>
                         <div class="panel-body">
-                            <textarea class="form-control" rows="3" name="question" ></textarea>
+                            <textarea class="form-control" rows="3" name="question" required></textarea>
                             <br />
                             <button type="submit" class="btn btn-default">Submit</button>
                         </div>

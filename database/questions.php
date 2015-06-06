@@ -155,12 +155,9 @@ function insertAnswer($content, $questionId)
 function getAllQuestions()
 {
     global $conn;
-    $stmt = $conn->prepare("SELECT content.created_when, question.id, question.title, question.content, question.priority FROM content, question WHERE content.content_type = 1 AND content.table_id = question.id");
+    $stmt = $conn->prepare("SELECT content.created_when, question.id, question.title, question.content, question.priority FROM content, question WHERE content.content_type = 1 AND content.table_id = question.id ORDER BY question.id DESC");
     $stmt->execute();
     return $stmt->fetchAll();
-
-
-
 
 }
 
@@ -168,7 +165,7 @@ function getAllUserQuestions($user_id)
 {
     global $conn;
     $stmt = $conn->prepare("SELECT content.created_when, question.id, question.title, question.content, question.priority, question.closed
-                            FROM content, question WHERE content.content_type = 1 AND content.table_id = question.id AND content.user_id = ?");
+                            FROM content, question WHERE content.content_type = 1 AND content.table_id = question.id AND content.user_id = ? ORDER BY question.id DESC");
     $stmt->execute(array($user_id));
     return $stmt->fetchAll();
 }
@@ -315,7 +312,7 @@ function getFavouriteQuestionsOfUser($userId) {
 
 
     $stmt = $conn->prepare("SELECT \"User\".id as userId,\"User\".name as userName, \"User\".email as userEmail  , content.id as contentId, content.created_when, question.id as questionId, question.content, question.title
-                            FROM favouritequestions, content, question, \"User\" WHERE content.content_type = 1 AND favouritequestions.user_id = ? AND question.id = favouritequestions.question_id AND content.table_id = question.id  AND \"User\".id = content.user_id");
+                            FROM favouritequestions, content, question, \"User\" WHERE content.content_type = 1 AND favouritequestions.user_id = ? AND question.id = favouritequestions.question_id AND content.table_id = question.id  AND \"User\".id = content.user_id ORDER BY question.id DESC");
     $stmt->execute(array($userId));
     $favouriteQuestions =  $stmt->fetchAll();
 
@@ -372,7 +369,7 @@ function getTagQuestions($tag) {
 
     $stmt = $conn->prepare("SELECT \"User\".id as userId,\"User\".name as userName, \"User\".email as userEmail  , content.id as contentId, content.created_when, question.id as questionId, question.content, question.title
                             FROM tag, contenttag, question, \"User\", content
-                            WHERE tag.name = ? AND contenttag.tag_id = tag.id AND question.id = contenttag.content_id AND content.content_type = 1 AND content.table_id = question.id AND \"User\".id = content.user_id");
+                            WHERE tag.name = ? AND contenttag.tag_id = tag.id AND question.id = contenttag.content_id AND content.content_type = 1 AND content.table_id = question.id AND \"User\".id = content.user_id ORDER BY question.id DESC");
     $stmt->execute(array($tag));
     $tagQuestions =  $stmt->fetchAll();
 

@@ -5,7 +5,9 @@ $(document).ready(function(){
         if (code == 13) { //enter key
             e.preventDefault();
             e.stopPropagation();
-            $(this).closest('form').submit();
+            if($(this).val() != "")
+                $(this).closest('form').submit();
+            else bootbox.alert("Comment cannot be empty");
         }
     });
     

@@ -5,7 +5,7 @@ include_once($BASE_DIR .'database/questions.php');
 checkIfLoggedIn();
 
 if (!$_POST['title'] || !$_POST['question']) {
-    $_SESSION['error_messages'][] = 'Invalid login';
+    $_SESSION['error_messages'][] = 'Invalid parameters';
     $_SESSION['form_values'] = $_POST;
     header('Location: ' . $_SERVER['HTTP_REFERER']);
     exit;

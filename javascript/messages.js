@@ -40,27 +40,44 @@ $(document).ready(function () {
         var subject = $("#subject").val();
         var message = $("#message").val();
 
-        $.ajax({
-            url: BASE_URL + "actions/messages/create.php",
-            type: "POST",
-            data: {
-                to_id: to_id,
-                subject: subject,
-                message: message
-            },
-            success: function (data, textStatus, jqXHR) {
-                console.log("Success");
-                window.location.replace(BASE_URL + "pages/users/messages.php");
-            },
-            error: function (data, textStatus, jqXHR) {
-                console.log(data);
-                if (errors == 0) {
-                    var errorDiv = $(".normalheader");
-                    errorDiv.after("<div class='normalheader'> <div id='error_messages'><div class='alert alert-danger'>The destination user does not exists</div></div></div>");
-                    errors++;
-                }
+        console.log(to_id);
+        console.log(subject);
+        console.log(message);
+
+        if(to_id == "" || subject == "" || message == "") {
+            bootbox.alert("All fields are required");
+        }
+        else{
+            if(subject.length > 20)
+                bootbox.alert("Subject must have a maximum of 20 characters");
+            else if(message.length > 70)
+                bootbox.alert("Message must have a maximum of 70 characters");
+            else {
+                $.ajax({
+                    url: BASE_URL + "actions/messages/create.php",
+                    type: "POST",
+                    data: {
+                        to_id: to_id,
+                        subject: subject,
+                        message: message
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                        console.log("Success");
+                        window.location.replace(BASE_URL + "pages/users/messages.php");
+                    },
+                    error: function (data, textStatus, jqXHR) {
+                        console.log(data);
+                        if (errors == 0) {
+                            var errorDiv = $(".normalheader");
+                            errorDiv.after("<div class='normalheader'> <div id='error_messages'><div class='alert alert-danger'>The destination user does not exists</div></div></div>");
+                            errors++;
+                        }
+                    }
+                });
             }
-        });
+        }
+
+
     });
 
 });

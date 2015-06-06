@@ -169,11 +169,10 @@
                         <div class="panel-body">
                             <form action="{$BASE_URL}actions/questions/add_answer.php" id="addAnswerForm" method="post">
                                 <input hidden="true" name="questionId" value="{$question.question.questionid}"/>
-                                <textarea name="answerContent" class="form-control" rows="3"></textarea>
+                                <textarea name="answerContent" class="form-control" rows="3" required="true"></textarea>
                                 <br/>
                                 <button type="submit" class="btn btn-default">Submit</button>
                             </form>
-
                         </div>
                     </div>
                 </div>

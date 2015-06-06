@@ -22,11 +22,11 @@
                     <form action="{$BASE_URL}actions/users/login.php" id="loginForm" method="post">
                         <div class="form-group">
                             <label class="control-label" for="email">E-mail</label>
-                            <input type="email" placeholder="example@gmail.com" title="Please enter you email" required="" value="{$smarty.session.oldinput.email}" name="email" id="email" class="form-control">
+                            <input type="email" placeholder="example@gmail.com" title="Please enter you email" required="" value="{$smarty.session.oldinput.email}" name="email" id="email" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="password">Password</label>
-                            <input type="password" title="Please enter your password" placeholder="******" required="" value="" name="password" id="password" class="form-control">
+                            <input type="password" title="Please enter your password" placeholder="******" required="" value="" name="password" id="password" class="form-control" required>
                         </div>
                         <button class="btn btn-success btn-block">Login</button>
                         <a class="btn btn-default btn-block" href="{$BASE_URL}pages/users/register.php">Register</a>

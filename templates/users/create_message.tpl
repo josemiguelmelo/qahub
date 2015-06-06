@@ -13,9 +13,10 @@
 
     <div class="hpanel">
         <div class="panel-body login-box col-lg-10" style="margin-left:7.2%;margin-right:3.6%">
+            <form>
                     <div class="form-group">
                         <label>Destination</label>
-                        <input type="" value="" id="to_email" class="form-control" name="to_email">
+                        <input type="email" value="" id="to_email" class="form-control" name="to_email" required>
                     </div>
 
                     <div class="form-group">
@@ -25,12 +26,13 @@
 
                     <div class="form-group">
                         <label> Message </label>
-                        <textarea class="form-control" rows="5" id="message"></textarea>
+                        <textarea class="form-control" rows="5" id="message" required></textarea>
                     </div>
 
                     <div class="text-center">
                         <button class="btn btn-success" id="create-message">Send</button>
                     </div>
+            </form>
         </div>
     </div>
 

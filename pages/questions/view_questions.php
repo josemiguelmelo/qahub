@@ -4,9 +4,6 @@ include_once($BASE_DIR.'database/questions.php');
 include_once($BASE_DIR.'database/messages.php');
 include_once($BASE_DIR.'database/users.php');
 
-
-
-
 $questions = getAllQuestions();
 $userAdmin = checkAdmin($_SESSION['user']['id']);
 
