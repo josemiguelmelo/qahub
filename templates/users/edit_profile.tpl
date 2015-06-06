@@ -13,6 +13,7 @@
     </div>
 
     <div class="content">
+
         <div class="row">
             <div class="col-lg-12 animated-panel zoomIn" style="-webkit-animation-delay: 0.2s;">
                 <div class="hpanel">
@@ -62,6 +63,80 @@
             </div>
         </div>
     </div>
+
+<div class="row">
+    <div class="col-lg-12 animated-panel zoomIn" style="-webkit-animation-delay: 0.2s;">
+        <div class="hpanel">
+            <div class="panel-heading">
+                Upload Money
+            </div>
+        <div class="hpanel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="panel panel-success">
+                            <div class="panel-heading text-center">
+                                Current
+                            </div>
+                            <div class="panel-body text-center">
+                                <span style="font-size: 1.2em;">$ {$smarty.session.user.cash / 100}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-8">
+                        <form method="POST" id="payment-form" action="{$BASE_URL}actions/users/upload_money.php">
+                            <span class="payment-errors"></span>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>
+                                        <span>Amount ($)</span>
+                                        <input class="form-control" type="text" name="amount">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>
+                                        <span>Card Number</span>
+                                        <input class="form-control" type="text" data-stripe="number">
+                                    </label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>
+                                        <span>CVC</span>
+                                        <input class="form-control" type="text" data-stripe="cvc">
+                                    </label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>
+                                        <span>Expiration (MM/YYYY)</span>
+                                        <input class="form-control" type="text" data-stripe="exp-month" placeholder="Month"> <input  class="form-control" placeholder="Year" type="text" data-stripe="exp-year">
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <br>
+                                    <button class="btn btn-success" type="submit">Upload Money</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
 </div>
+
+
+</div>
+
+
 
 {include file='common/footer.tpl'}

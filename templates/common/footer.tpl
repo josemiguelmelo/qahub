@@ -11,6 +11,7 @@
 <script src="{$BASE_URL}/vendor/bootbox.min.js"></script>
 
 
+
 <!-- App scripts -->
 <script src="{$BASE_URL}/javascript/qahub.js"></script>
 
@@ -25,6 +26,12 @@
 <script src="{$BASE_URL}/javascript/bootstrap-tagsinput.js"></script>
 <script src="{$BASE_URL}/javascript/questiontag.js"></script>
 <script src="{$BASE_URL}/javascript/followuser.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script src="{$BASE_URL}/javascript/stripe_handle.js"></script>
+
 
 
 </body>
