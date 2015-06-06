@@ -25,6 +25,23 @@ function createUser($username, $email, $password)
 		));
 }
 
+
+function addAmount($userId, $amount)
+{
+    global $conn;
+
+    $inputArray = array();
+    $user = getUserById($userId);
+
+    $query = "UPDATE \"User\" SET cash = ? WHERE id = ?";
+    $amount = $user['cash'] + $amount;
+    $inputArray[] = intval($amount);
+    $inputArray[] = $userId;
+
+    $stmt = $conn->prepare($query);
+    $stmt->execute($inputArray);
+}
+
 function isLoginCorrect($email, $password)
 {
 	global $conn;
@@ -214,6 +231,21 @@ function getAllUsers()
 	$stmt->execute();
 
 	return $stmt->fetchAll();
+}
+
+function setUserAsAdmin($userId)
+{
+    global $conn;
+
+    $inputArray = array();
+
+    $query = "UPDATE \"User\" SET role = 2 WHERE id = ?";
+
+    $inputArray[] = $userId;
+
+    $stmt = $conn->prepare($query);
+    $stmt->execute($inputArray);
+
 }
 
 function deleteUserId($id)

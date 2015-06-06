@@ -38,6 +38,14 @@
                                                     <input type="hidden" value={$user.id} name="id" id="id">
                                                     <button class="btn-sm btn btn-danger btn-block">Delete</button>
                                                 </form>
+                                                {if $user.role == 1}
+                                                    <form action="{$BASE_URL}actions/users/setAdmin.php" id="userAdmin" method="post">
+                                                        <input type="hidden" value={$user.id} name="id" id="id">
+                                                        <button class="btn-sm btn btn-success btn-block">Set as admin</button>
+                                                    </form>
+                                                {/if}
+
+
                                             </div>
                                         </div>
 
