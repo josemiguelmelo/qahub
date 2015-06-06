@@ -68,3 +68,17 @@ function getUserMessages($id)
 	$count = $stmt->fetch();
 	return $count['count'];
 }
+
+function checkIfQuestionCreator($userId,$messageId)
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT user_id FROM Content WHERE table_id = ? AND content_type = 1");
+	$stmt->execute(array($messageId));
+	$creator_id = $stmt->fetch();
+	if($userId==$creator_id['user_id']) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
