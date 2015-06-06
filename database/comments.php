@@ -28,8 +28,8 @@ function insertComment($content, $parentId, $type){
     $contentReplyId = $stmt->fetch()['id'];
 
     if($type == 1) {
-        $stmt = $conn->prepare("SELECT content.id FROM content, question WHERE question.id = $parentId AND content.table_id = question.id");
-        $stmt->execute();
+        $stmt = $conn->prepare("SELECT id FROM content WHERE table_id = ? and content_type=1");
+		$stmt->execute(array($parentId));
         $contentId = $stmt->fetch();
 
     } else if($type == 2) {
