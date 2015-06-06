@@ -1,6 +1,8 @@
 <?php
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/questions.php');
+include_once($BASE_DIR.'database/messages.php');
+
 
 if (!$_GET['search']) {
 	$_SESSION['error_messages'][] = 'Invalid search';
@@ -19,8 +21,11 @@ try {
 	exit;
 }
 
+$numberOfMessages = getUserMessages($_SESSION['user']['id']);
+$smarty->assign('numberOfMessages',$numberOfMessages);
+
 $smarty->assign('all_questions', $questions);
 $smarty->assign('subtitle', 'Search results');
 
 $smarty->display('questions/view_questions.tpl');
-?>
+

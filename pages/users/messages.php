@@ -6,6 +6,8 @@ $messages = getAllMessages($_SESSION['user']['id']);
 
 $SUCCESS_MESSAGES = $_SESSION['SUCCESS_MESSAGES'];
 
+checkIfLoggedIn();
+
 $smarty->assign('all_messages', $messages);
 $smarty->assign('SUCCESS_MESSAGES',$SUCCESS_MESSAGES);
 
