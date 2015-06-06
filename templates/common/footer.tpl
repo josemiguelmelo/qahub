@@ -29,6 +29,7 @@
 <script src="{$BASE_URL}/javascript/forms.js"></script>
 
 <script src="{$BASE_URL}/javascript/donate.js"></script>
+<script src="{$BASE_URL}/javascript/promote.js"></script>
 
 
 

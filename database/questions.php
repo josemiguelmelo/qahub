@@ -376,3 +376,12 @@ function getTagQuestions($tag) {
 
     return $tagQuestions;
 }
+
+function promoteQuestion($questionId)
+{
+    global $conn;
+
+    $stmt = $conn->prepare("UPDATE question SET priority = ? WHERE question.id = ?");
+    $stmt->execute(array(2, $questionId ));
+
+}
