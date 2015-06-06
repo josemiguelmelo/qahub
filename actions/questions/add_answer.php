@@ -25,6 +25,6 @@ try {
     header("Location: $BASE_URL" . 'pages/questions/create_question.php');
     exit;
 }
-$_SESSION['success_messages'][] = 'Question created successfully';
-header("Location: " . $BASE_URL. 'pages/questions/view_questions.php');
+$_SESSION['success_messages'][] = 'Your answer was successfully created';
+header("Location: " . $BASE_URL. 'pages/questions/view_question.php?id='.$questionId);
 ?>
