@@ -11,7 +11,7 @@ $userBadges = getUserBadges($userId);
 
 
 if( $_SESSION['user'] ) {
-    $isFollowing = isFollowing($_SESSION['user']['id'], $userId);
+    $isFollowing = isFavourite($_SESSION['user']['id'], $userId);
     $user['followed'] = $isFollowing;
 }
 $user['questions'] = $userQuestions;
