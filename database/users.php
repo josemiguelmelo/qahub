@@ -36,7 +36,7 @@ function isLoginCorrect($email, $password)
 	return $stmt->fetch();
 }
 
-function followUser($followerId, $userToFollowId)
+function favouriteUser($followerId, $userToFollowId)
 {
     global $conn;
 
@@ -55,7 +55,7 @@ function followUser($followerId, $userToFollowId)
     return ['error'=>false, 'value'=>false];
 }
 
-function unfollowUser($followerId, $userFollowedId)
+function unfavouriteUser($followerId, $userFollowedId)
 {
     global $conn;
 
@@ -76,7 +76,7 @@ function unfollowUser($followerId, $userFollowedId)
     return ['error' => false, 'value'=>true];
 }
 
-function isFollowing($followerId, $userFollowedId)
+function isFavourite($followerId, $userFollowedId)
 {
     global $conn;
 
@@ -92,6 +92,20 @@ function isFollowing($followerId, $userFollowedId)
         return true;
     }
     return false;
+}
+
+
+function getAllFavouritesOfUser($userId)
+{
+    global $conn;
+
+    $queryArray = [$userId];
+
+    $stmt = $conn->prepare("SELECT *
+                            FROM favouriteusers
+                            WHERE user_id = ?");
+    $stmt->execute($queryArray);
+    return $stmt->fetchAll();
 }
 
 function getUserById($id)

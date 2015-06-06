@@ -13,9 +13,9 @@ $currentUserId = $_SESSION['user']['id'];
 header('Content-Type: application/json');
 
 if($follow == 'true'){
-    echo json_encode(followUser($currentUserId , $followId));
+    echo json_encode(favouriteUser($currentUserId , $followId));
 }else{
-    echo json_encode(unfollowUser($currentUserId , $followId));
+    echo json_encode(unfavouriteUser($currentUserId , $followId));
 }
 
 
