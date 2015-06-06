@@ -27,4 +27,3 @@ try {
 }
 $_SESSION['success_messages'][] = 'Your answer was successfully created';
 header("Location: " . $BASE_URL. 'pages/questions/view_question.php?id='.$questionId);
-?>

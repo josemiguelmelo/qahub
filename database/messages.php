@@ -59,3 +59,12 @@ function createMessage($message)
 	return ['error' => false];
 
 }
+
+function getUserMessages($id)
+{
+	global $conn;
+	$stmt = $conn->prepare("SELECT count(*) FROM Message WHERE to_id = ?");
+	$stmt->execute(array($id));
+	$count = $stmt->fetch();
+	return $count['count'];
+}

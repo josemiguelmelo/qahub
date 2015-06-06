@@ -48,7 +48,7 @@
                         <a href="{$BASE_URL}pages/users/view_users.php"> <span class="nav-label">See users</span></a>
                     </li>
                     <li>
-                        <a href="{$BASE_URL}pages/users/messages.php"><span class="nav-label">Messages</span></a>
+                        <a href="{$BASE_URL}pages/users/messages.php"><span class="nav-label">Messages  {if isset($numberOfMessages)} ({$numberOfMessages}){/if}</span></a>
                     </li>
                     <li>
                         <a href="{$BASE_URL}actions/users/export.php"><span class="nav-label">Export Users</span></a>
@@ -78,7 +78,7 @@
                     <a href="{$BASE_URL}pages/questions/view_your_favourite_questions.php"> <span class="nav-label">Your Favourite Questions</span></a>
                 </li>
                 <li>
-                    <a href="{$BASE_URL}pages/users/messages.php"><span class="nav-label">Messages</span></a>
+                    <a href="{$BASE_URL}pages/users/messages.php"><span class="nav-label">Messages  {if isset($numberOfMessages)} ({$numberOfMessages}){/if}</span></a>
                 </li>
 
                 <li>
