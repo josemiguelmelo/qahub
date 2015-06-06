@@ -40,6 +40,9 @@ function addAmount($userId, $amount)
 
     $stmt = $conn->prepare($query);
     $stmt->execute($inputArray);
+
+    $stmt = $conn->prepare("INSERT INTO transaction (user_id, amount, date, description, type) VALUES (?, ?, NOW(), ?, ?)");
+    $stmt->execute(array($userId, $amount, $amount . "dollars added to account", 1));
 }
 
 function removeAmount($userId, $amount)
@@ -57,6 +60,9 @@ function removeAmount($userId, $amount)
 
     $stmt = $conn->prepare($query);
     $stmt->execute($inputArray);
+
+    $stmt = $conn->prepare("INSERT INTO transaction (user_id, amount, date, description, type) VALUES (?, ?, NOW(), ?, ?)");
+    $stmt->execute(array($userId, $amount, $amount . "dollars removed from account", 2));
 }
 
 function isLoginCorrect($email, $password)
