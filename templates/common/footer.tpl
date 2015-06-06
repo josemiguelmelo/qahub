@@ -28,6 +28,8 @@
 <script src="{$BASE_URL}/javascript/followuser.js"></script>
 <script src="{$BASE_URL}/javascript/forms.js"></script>
 
+<script src="{$BASE_URL}/javascript/donate.js"></script>
+
 
 
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>

@@ -42,6 +42,23 @@ function addAmount($userId, $amount)
     $stmt->execute($inputArray);
 }
 
+function removeAmount($userId, $amount)
+{
+    global $conn;
+
+    $inputArray = array();
+    $user = getUserById($userId);
+
+    $query = "UPDATE \"User\" SET cash = ? WHERE id = ?";
+    $amount = $user['cash'] - $amount;
+
+    $inputArray[] = intval($amount);
+    $inputArray[] = $userId;
+
+    $stmt = $conn->prepare($query);
+    $stmt->execute($inputArray);
+}
+
 function isLoginCorrect($email, $password)
 {
 	global $conn;
@@ -308,4 +325,35 @@ function getUserBadges($id) {
                             WHERE badge.id = userbadges.badge_id AND userbadges.user_id = ?");
     $stmt->execute(array($id));
     return $stmt->fetchAll();
+}
+
+function donateToUser($fromId, $toId, $amount)
+{
+
+    try
+    {
+        removeAmount($fromId, $amount);
+    }
+    catch (PDOException $e)
+    {
+        http_response_code(400);
+
+        return ['error' => true];
+    }
+
+    try
+    {
+        addAmount($toId, $amount);
+    }
+    catch (PDOException $e)
+    {
+        http_response_code(400);
+
+        return ['error' => true];
+    }
+
+
+    return ['error'=>false, 'value'=>false];
+
+
 }

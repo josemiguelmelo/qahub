@@ -98,8 +98,10 @@
                                         </button>
                                     </div>
                                 {/if}
-
-
+                                <br><br>
+                                <div class="col-md-2">
+                                    <button data-toggle="modal" data-target="#donateModal" class="btn btn-success">Donate</button>
+                                </div>
                             </div>
                     </div>
                 </div>
@@ -109,6 +111,28 @@
 
     </div>
 </div>
+</div>
+
+
+<!-- Donate Modal -->
+<div class="modal fade" id="donateModal" tabindex="-1" role="dialog" aria-labelledby="donateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Donation value ($) </h5>
+                        <input placeholder="Donation value" class="form-control" type="number" id="donationValue">
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button id="donateToUserButton" data-id="{$user.id}" type="button" class="btn btn-success">Donate</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 {include file='common/footer.tpl'}
