@@ -81,7 +81,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                <button id="promoteQuestion" type="button" class="btn btn-success">Donate</button>
+                <button id="promoteQuestion" type="button" class="btn btn-success">Promote</button>
             </div>
         </div>
     </div>
