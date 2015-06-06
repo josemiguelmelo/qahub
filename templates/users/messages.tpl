@@ -16,7 +16,7 @@
         </div>
     </div>
 
-
+    {if !empty($all_messages)}
     <div class="hpanel" style="margin-left: 3.6%;margin-right: 3.6%;margin-top:1%;">
         <div class="panel-body">
             <div class="col-md-12">
@@ -63,5 +63,6 @@
             </div>
         </div>
     </div>
+    {/if}
 
 {include file='common/footer.tpl'}

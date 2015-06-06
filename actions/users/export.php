@@ -2,6 +2,8 @@
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/users.php');
 
+checkIfAdmin();
+
 header('Content-Type: text/csv; charset=utf-8');
 header('Content-Disposition: attachment; filename=users.csv');
 

@@ -54,6 +54,8 @@ function createMessage($message)
 		return ['error' => true,'exception' => $e];
 	}
 
+	$_SESSION['SUCCESS_MESSAGES'] = "Your message was successfully sent";
+
 	return ['error' => false];
 
 }

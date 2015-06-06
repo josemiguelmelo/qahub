@@ -2,6 +2,7 @@
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/questions.php');
 
+checkIfAdmin();
 
 header('Content-Type: text/csv; charset=utf-8');
 header('Content-Disposition: attachment; filename=questions.csv');
