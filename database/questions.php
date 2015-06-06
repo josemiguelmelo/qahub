@@ -142,8 +142,8 @@ function insertAnswer($content, $questionId)
     $contentReplyId = $stmt->fetch()['id'];
 
 
-    $stmt = $conn->prepare("SELECT content.id FROM content, question WHERE question.id = $questionId AND content.table_id = question.id");
-    $stmt->execute();
+    $stmt = $conn->prepare("SELECT id FROM content WHERE table_id = ? and content_type=1");
+    $stmt->execute(array($questionId));
     $contentId = $stmt->fetch();
 
 
