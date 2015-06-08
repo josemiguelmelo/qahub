@@ -19,7 +19,7 @@
     <div class="content">
         <div class="row">
             <div class="col-md-12">
-                        {foreach from=$all_users item=user}
+                        {foreach from=$all_users->data item=user}
                             <div class="col-lg-12 col-xs-10">
                                 <div class="hpanel hblue">
                                     <div class="panel-body">
@@ -58,6 +58,13 @@
 
                             </div>
                         {/foreach}
+
+
+                <div class="row">
+                    <div class="col-md-2 col-md-offset-5">
+                        {$pagination_links}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

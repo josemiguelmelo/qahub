@@ -41,7 +41,7 @@
                                 Delete
                             </th>
                         </tr>
-                        {foreach from=$all_messages item=message}
+                        {foreach from=$all_messages->data item=message}
                             {if $message.seen eq FALSE}
                                 <tr class="unread" id={$message.id}>
                                 {else}
@@ -57,8 +57,17 @@
                             </td>
                             </tr>
                         {/foreach}
+
+
+
                         </tbody>
                     </table>
+                    <div class="row">
+                        <div class="col-md-2 col-md-offset-5">
+                            {$pagination_links}
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

@@ -7,4 +7,4 @@ checkIfAdmin();
 $numberOfMessages = getUserMessages($_SESSION['user']['id']);
 $smarty->assign('numberOfMessages',$numberOfMessages);
 
-$smarty->display('users/admin_questions.tpl');
+$smarty->display('questions/admin_questions.tpl');

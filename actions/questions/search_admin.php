@@ -3,6 +3,7 @@ include_once('../../config/init.php');
 include_once($BASE_DIR.'database/questions.php');
 include_once($BASE_DIR.'database/messages.php');
 
+include_once($BASE_DIR.'Paginator.php');
 
 checkIfLoggedIn();
 
@@ -14,13 +15,16 @@ if(!$userAdmin) {
 	exit();
 }
 
+$paginator = new Paginator($questions);
+
 
 $numberOfMessages = getUserMessages($_SESSION['user']['id']);
 
 $smarty->assign('numberOfMessages',$numberOfMessages);
-$smarty->assign('all_questions',$questions);
 $smarty->assign('subtitle', 'The most popular questions right now.');
 $smarty->assign('admin',$userAdmin);
+$smarty->assign('all_questions', ($_GET['limit'] && $_GET['position']) ? $paginator->getData($_GET['limit'], $_GET['position']) : $paginator->getData());
+$smarty->assign('pagination_links', $paginator->createLinks(5, "pagination pagination-sm"));
 
 $smarty->display('questions/admin_questions.tpl');
 
