@@ -384,3 +384,13 @@ function donateToUser($fromId, $toId, $amount)
 
 
 }
+
+function getUsersByString($name)
+{
+	global $conn;
+
+	$name = "%".$name."%";
+	$stmt = $conn->prepare("SELECT * FROM \"User\" where (LOWER(name) LIKE LOWER(?) OR LOWER(email) like LOWER(?) ) and id != ?");
+	$stmt->execute(array($name,$name,$_SESSION['user']['id']));
+	return $stmt->fetchAll();
+}
