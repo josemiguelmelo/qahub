@@ -10,6 +10,7 @@ $(document).ready(function() {
                 $("#promoteModal").modal("hide");
                 if(data.error == false){
                     bootbox.alert("Question promoted successfully.");
+                    $("#"+questionId).remove();
                 }else{
                     if(data.type == 'IF'){
                         bootbox.alert("Insufficient funds.");

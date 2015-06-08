@@ -25,6 +25,27 @@ function createUser($username, $email, $password)
 		));
 }
 
+function addReward($user_id,$badge_id) {
+
+    global $conn;
+
+    $stmt = $conn->prepare("SELECT name FROM badge WHERE id = ?");
+    $stmt->execute(array($badge_id));
+
+    $name = $stmt->fetch()['name'];
+
+    $stmt = $conn->prepare("SELECT id, reward FROM reward WHERE reward.name = ?");
+    $stmt->execute(array($name));
+    $reward = $stmt->fetch();
+    $reward_id = $reward['id'];
+    $reward_ammount = $reward['reward'];
+
+    $stmt = $conn->prepare("INSERT INTO reward_user VALUES (?,?)");
+    $stmt->execute(array($reward_id,$user_id));
+
+    addAmount($user_id,$reward_ammount);
+
+}
 
 function addAmount($userId, $amount)
 {

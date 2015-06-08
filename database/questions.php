@@ -1,5 +1,5 @@
 <?php
-
+include_once($BASE_DIR.'database/users.php');
 /** Question -> 1
  * Answer -> 2
  * Comment -> 3
@@ -18,15 +18,15 @@ function createQuestion($title, $tags, $question, $priority)
 
     $created_when = date("Y-m-d H:i:s");
 
-    $stmt = $conn->prepare("INSERT INTO content (user_id, created_when, table_id, content_type) VALUES (?, ?, ?,?)");
+    $stmt = $conn->prepare("INSERT INTO content (user_id, created_when, table_id, content_type) VALUES (?, ?, ?,?) RETURNING id");
     $stmt->execute(array($_SESSION['user']['id'], $created_when, $questionId, 1));
-
+    $content_id = $stmt->fetch()['id'];
     //add tags
     $tags_array = explode(",", $tags);
 
     foreach ($tags_array as $tag) {
         $tag_id = insertTag($tag);
-        insertQuestionTag($questionId,$tag_id);
+        insertQuestionTag($content_id,$tag_id);
     }
 
     addUserBadges($_SESSION['user']['id']);
@@ -43,6 +43,7 @@ function addUserBadges($user_id) {
     if($question_count == 3) {
         $stmt = $conn->prepare("INSERT INTO userbadges (user_id,badge_id) VALUES(?,?)");
         $stmt->execute(array($user_id,1));
+        addReward($user_id,1);
     }
 
 }
@@ -242,11 +243,15 @@ function getQuestionById($id){
 function getQuestionTags($questionId) {
     global $conn;
 
-    $stmt = $conn->prepare("SELECT tag.name FROM tag, contenttag WHERE contenttag.content_id = ? AND tag.id = contenttag.tag_id");
+    $stmt = $conn->prepare("SELECT id FROM content WHERE table_id = ? AND content_type = 1");
     $stmt->execute(array($questionId));
+    $content_id = $stmt->fetch()['id'];
+
+
+    $stmt = $conn->prepare("SELECT tag.name FROM tag, contenttag WHERE contenttag.content_id = ? AND tag.id = contenttag.tag_id");
+    $stmt->execute(array($content_id));
 
     $tags_array = $stmt->fetchAll();
-
     $tags_string = "";
 
     for($i = 0; $i < sizeof($tags_array); $i++) {
@@ -256,7 +261,6 @@ function getQuestionTags($questionId) {
 
         $tags_string = $tags_string . $tags_array[$i]['name'];
     }
-
     return $tags_string;
 }
 
@@ -369,7 +373,7 @@ function getTagQuestions($tag) {
 
     $stmt = $conn->prepare("SELECT \"User\".id as userId,\"User\".name as userName, \"User\".email as userEmail  , content.id as contentId, content.created_when, question.id as questionId, question.content, question.title
                             FROM tag, contenttag, question, \"User\", content
-                            WHERE tag.name = ? AND contenttag.tag_id = tag.id AND question.id = contenttag.content_id AND content.content_type = 1 AND content.table_id = question.id AND \"User\".id = content.user_id ORDER BY question.id DESC");
+                            WHERE tag.name = ? AND contenttag.tag_id = tag.id AND content.id = contenttag.content_id AND content.content_type = 1 AND content.table_id = question.id AND \"User\".id = content.user_id ORDER BY question.id DESC");
     $stmt->execute(array($tag));
     $tagQuestions =  $stmt->fetchAll();
 

@@ -35,7 +35,7 @@
                                             <a class="btn btn-success btn-sm" href="{$BASE_URL}pages/questions/edit_question.php?id={$question.id}">Edit</a>
 
                                             {if $question.priority ==1 }
-                                                <button data-toggle="modal" data-target="#promoteModal" onclick="setQuestionIdToPromote({$question.id})" class="btn btn-warning btn-sm">Promote</button>
+                                                <button id={$question.id} data-toggle="modal" data-target="#promoteModal" onclick="setQuestionIdToPromote({$question.id})" class="btn btn-warning btn-sm">Promote</button>
                                             {/if}
                                             <a class="btn btn-danger btn-sm" href="{$BASE_URL}actions/questions/close.php?id={$question.id}">Close</a>
                                         {else}
