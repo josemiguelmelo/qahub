@@ -6,6 +6,10 @@ include_once($BASE_DIR.'database/messages.php');
 checkIfLoggedIn();
 
 $userAdmin = checkAdmin($_SESSION['user']['id']);
+if(!$userAdmin) {
+	echo('You know you are not an admin...');
+	exit();
+}
 
 $users = getUsersByString($_POST['search']);
 

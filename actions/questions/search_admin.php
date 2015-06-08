@@ -9,6 +9,12 @@ checkIfLoggedIn();
 $questions = getQuestionsByString($_POST['search']);
 $userAdmin = checkAdmin($_SESSION['user']['id']);
 
+if(!$userAdmin) {
+	echo('You know you are not an admin...');
+	exit();
+}
+
+
 $numberOfMessages = getUserMessages($_SESSION['user']['id']);
 
 $smarty->assign('numberOfMessages',$numberOfMessages);
