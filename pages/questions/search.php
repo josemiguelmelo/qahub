@@ -15,10 +15,11 @@ $search = $_GET['search'];
 try {
 	$questions = search($search);
 
-} catch (PDOException $e) {
-	die(var_dump($e));
-	header("Location: $BASE_URL");
-	exit;
+} catch (PDOException $e){
+    error_log($exception . '\n', 3, $BASE_DIR . "/logs/log.txt");
+    $_SESSION['error_messages'][] = 'Error searching';
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    exit;
 }
 $sponsoredQuestions = array();
 
@@ -54,7 +55,16 @@ if(count($allSponsoredQuestions) <= 3){
 }
 
 $smarty->assign('sponsored_questions', $sponsoredQuestions);
-$numberOfMessages = getUserMessages($_SESSION['user']['id']);
+try{
+    $numberOfMessages = getUserMessages($_SESSION['user']['id']);
+} catch (PDOException $e){
+    error_log($exception . '\n', 3, $BASE_DIR . "/logs/log.txt");
+    $_SESSION['error_messages'][] = 'Error searching';
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    exit;
+}
+
+
 $smarty->assign('numberOfMessages',$numberOfMessages);
 
 $smarty->assign('all_questions', $questions);

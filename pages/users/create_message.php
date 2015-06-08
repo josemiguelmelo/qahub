@@ -4,7 +4,13 @@ include_once($BASE_DIR.'database/messages.php');
 
 checkIfLoggedIn();
 
-$numberOfMessages = getUserMessages($_SESSION['user']['id']);
+try{
+
+    $numberOfMessages = getUserMessages($_SESSION['user']['id']);
+}catch (PDOException $e){
+    error_log($exception . '\n', 3, $BASE_DIR . "/logs/log.txt");
+    $numberOfMessages = 0;
+}
 
 $smarty->assign('numberOfMessages',$numberOfMessages);
 $smarty->display('users/create_message.tpl');

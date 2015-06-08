@@ -28,7 +28,16 @@ if ($password != $password_confirmation) {
 // check if password different from last 3 passwords
 if($password != "")
 {
-    $lastThreePasswords = getLastThreePasswords($_SESSION['user']['id']);
+    try{
+
+        $lastThreePasswords = getLastThreePasswords($_SESSION['user']['id']);
+    }catch (PDOException $e) {
+        error_log($exception . '\n', 3, $BASE_DIR . "/logs/log.txt");
+        $_SESSION['error_messages'][] = 'Error changing password';
+
+        header("Location: $BASE_URL" . 'pages/users/edit_profile.php');
+        exit;
+    }
 
     foreach($lastThreePasswords as $lastPassword){
         if($lastPassword['password'] == sha1($password)){
@@ -102,12 +111,11 @@ try{
         addPasswordToHistory($_SESSION['user']['id'], $password);
     }
 } catch (PDOException $e) {
-    // TODO: error adding password to history
+    error_log($exception . '\n', 3, $BASE_DIR . "/logs/log.txt");
 }
 
 
-
-$_SESSION['user'] = getUserById($userId);
+    $_SESSION['user'] = getUserById($userId);
 
 $_SESSION['success_messages'][] = 'User profile updated successfully';
 header("Location: $BASE_URL" . 'pages/users/edit_profile.php');

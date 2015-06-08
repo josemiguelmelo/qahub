@@ -23,7 +23,6 @@ try{
     }
 
 } catch (PDOException $e) {
-    die(var_dump($e));
     $_SESSION['error_messages'][] = 'Error adding comment';
 
     $_SESSION['form_values'] = $_POST;
@@ -32,5 +31,3 @@ try{
 }
 $_SESSION['success_messages'][] = 'Comment added successfully';
 header("Location: " . $BASE_URL. 'pages/questions/view_question.php?id=' . $_POST['questionId']);
-
-?>

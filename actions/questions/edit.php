@@ -15,7 +15,6 @@ $tags = $_POST['tags'];
 try {
 	editQuestion($title, $tags, $question, 1, $_POST['questionId']);
 } catch (PDOException $e) {
-	die(var_dump($e));
 	$_SESSION['error_messages'][] = 'Error editing question';
 
 	$_SESSION['form_values'] = $_POST;

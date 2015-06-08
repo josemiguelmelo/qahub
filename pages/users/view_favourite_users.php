@@ -7,12 +7,19 @@ checkIfLoggedIn();
 
 $favouriteUsers = array();
 
-$favouriteUsersIds = getAllFavouritesOfUser($_SESSION['user']['id']);
-$numberOfMessages = getUserMessages($_SESSION['user']['id']);
+try{
 
-foreach($favouriteUsersIds as $id)
-{
-    $favouriteUsers[] = getUserById($id['favourite_id']);
+    $favouriteUsersIds = getAllFavouritesOfUser($_SESSION['user']['id']);
+    $numberOfMessages = getUserMessages($_SESSION['user']['id']);
+
+    foreach($favouriteUsersIds as $id)
+    {
+        $favouriteUsers[] = getUserById($id['favourite_id']);
+    }
+}catch (PDOException $e){
+    error_log($e);
+    $smarty->display('errors/unexpected_error.tpl');
+    exit;
 }
 
 $smarty->assign('favourite_users', $favouriteUsers);

@@ -6,8 +6,18 @@ include_once($BASE_DIR.'Paginator.php');
 
 checkIfLoggedIn();
 
-$users = getAllUsers();
-$numberOfMessages = getUserMessages($_SESSION['user']['id']);
+try{
+
+    $users = getAllUsers();
+    $numberOfMessages = getUserMessages($_SESSION['user']['id']);
+
+}catch (PDOException $e){
+    error_log($exception . '\n', 3, $BASE_DIR . "/logs/log.txt");
+    $_SESSION['error_messages'][] = 'Error retrieving users';
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    exit;
+}
+
 
 $paginator = new Paginator($users);
 

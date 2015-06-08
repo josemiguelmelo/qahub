@@ -7,7 +7,15 @@ checkIfAdmin();
 header('Content-Type: text/csv; charset=utf-8');
 header('Content-Disposition: attachment; filename=questions.csv');
 
-$questions=getAllQuestions();
+try{
+    $questions=getAllQuestions();
+}catch (PDOException $e) {
+    $_SESSION['error_messages'][] = 'Error closing question';
+
+    header("Location: $BASE_URL" . 'pages/questions/view_your_questions.php');
+    exit;
+}
+
 
 // create a file pointer connected to the output stream
 $output = fopen('php://output', 'w');

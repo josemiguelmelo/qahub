@@ -6,9 +6,17 @@ include_once($BASE_DIR.'Paginator.php');
 
 checkIfLoggedIn();
 
-$questions = getAllUserQuestions($_SESSION['user']['id']);
-$numberOfMessages = getUserMessages($_SESSION['user']['id']);
+try{
 
+    $questions = getAllUserQuestions($_SESSION['user']['id']);
+    $numberOfMessages = getUserMessages($_SESSION['user']['id']);
+}
+catch (PDOException $e){
+    error_log($exception . '\n', 3, $BASE_DIR . "/logs/log.txt");
+    $_SESSION['error_messages'][] = 'Error retrieving your questions';
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    exit;
+}
 
 $paginator = new Paginator($questions);
 $smarty->assign('numberOfMessages',$numberOfMessages);

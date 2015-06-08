@@ -3,7 +3,15 @@ include_once('../../config/init.php');
 include_once($BASE_DIR.'database/messages.php');
 include_once($BASE_DIR.'Paginator.php');
 
-$messages = getAllMessages($_SESSION['user']['id']);
+try{
+
+    $messages = getAllMessages($_SESSION['user']['id']);
+}catch (PDOException $e){
+    error_log($exception . '\n', 3, $BASE_DIR . "/logs/log.txt");
+    $_SESSION['error_messages'][] = 'Error retrieving messages';
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    exit;
+}
 
 $SUCCESS_MESSAGES = $_SESSION['SUCCESS_MESSAGES'];
 

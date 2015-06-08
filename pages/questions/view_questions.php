@@ -5,10 +5,20 @@ include_once($BASE_DIR.'database/messages.php');
 include_once($BASE_DIR.'database/users.php');
 include_once($BASE_DIR.'Paginator.php');
 
-$questions = getAllQuestions();
-$userAdmin = checkAdmin($_SESSION['user']['id']);
+try{
 
-$numberOfMessages = getUserMessages($_SESSION['user']['id']);
+    $questions = getAllQuestions();
+    $userAdmin = checkAdmin($_SESSION['user']['id']);
+
+    $numberOfMessages = getUserMessages($_SESSION['user']['id']);
+}catch (PDOException $e){
+    error_log($exception . '\n', 3, $BASE_DIR . "/logs/log.txt");
+    $_SESSION['error_messages'][] = 'Error getting questions';
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    exit;
+}
+
+
 $allSponsoredQuestions = array();
 $sponsoredQuestions = array();
 

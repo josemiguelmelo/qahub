@@ -18,7 +18,6 @@ try {
     insertAnswer($answer, $questionId);
 
 } catch (PDOException $e) {
-    die(var_dump($e));
     $_SESSION['error_messages'][] = 'Error adding question';
 
     $_SESSION['form_values'] = $_POST;

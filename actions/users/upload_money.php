@@ -26,6 +26,8 @@ try{
     ));
 
 }catch (Exception $e){
+
+    error_log($exception . '\n', 3, $BASE_DIR . "/logs/log.txt");
     $_SESSION['error_messages'][] = $e->getMessage();
     header("Location: $BASE_URL".'pages/users/edit_profile.php');
     exit;
