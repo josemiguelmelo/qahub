@@ -7,7 +7,11 @@
                 <h2 class="font-light m-b-xs">
                     All questions
                 </h2>
-                <small>Here you can manage all questions.</small>
+                <form role="search" class="navbar-form-custom" method="POST" action="{$BASE_URL}actions/questions/search_admin.php">
+                    <div class="form-group">
+                        <input type="text" placeholder="Search specific Question" class="form-control" name="search">
+                    </div>
+                </form>
             </div>
         </div>
     </div>

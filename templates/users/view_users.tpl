@@ -7,7 +7,11 @@
                 <h2 class="font-light m-b-xs">
                     All users
                 </h2>
-                <small>Here you can manage all users.</small>
+                <form role="search" class="navbar-form-custom" method="POST" action="{$BASE_URL}actions/users/search.php">
+                    <div class="form-group">
+                        <input type="text" placeholder="Search specific User" class="form-control" name="search">
+                    </div>
+                </form>
             </div>
         </div>
     </div>
