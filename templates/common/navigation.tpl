@@ -67,7 +67,7 @@
 
             {else} <!-- if it is a normal user -->
             <ul class="nav" id="side-menu">
-                {if $admin eq true}
+                {if $smarty.session.user.admin eq true}
                     <li>
                         <a href="{$BASE_URL}actions/users/switch_admin.php" > <span class="nav-label">Switch to Admin</span></a>
                     </li>

@@ -45,11 +45,15 @@ if(count($allSponsoredQuestions) <= 3){
 
 $paginator = new Paginator($questions);
 
+if($_SESSION['user']){
+
+    $_SESSION['user']['admin'] = $userAdmin;
+}
+
 $smarty->assign('sponsored_questions', $sponsoredQuestions);
 $smarty->assign('all_questions', ($_GET['limit'] && $_GET['position']) ? $paginator->getData($_GET['limit'], $_GET['position']) : $paginator->getData());
 $smarty->assign('pagination_links', $paginator->createLinks(5, "pagination pagination-sm"));
 $smarty->assign('subtitle', 'The most popular questions right now.');
-$smarty->assign('admin',$userAdmin);
 $smarty->assign('numberOfMessages',$numberOfMessages);
 
 
