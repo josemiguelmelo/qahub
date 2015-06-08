@@ -394,3 +394,14 @@ function promoteQuestion($questionId)
     $stmt->execute(array(2, $questionId ));
 
 }
+
+
+function getQuestionsByString($string)
+{
+	global $conn;
+
+	$string = "%".$string."%";
+	$stmt = $conn->prepare("SELECT * FROM Question where LOWER(title) LIKE LOWER(?) OR LOWER(content) like LOWER(?)");
+	$stmt->execute(array($string,$string));
+	return $stmt->fetchAll();
+}
