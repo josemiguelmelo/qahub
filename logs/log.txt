@@ -1,0 +1,25 @@
+\n\nexception 'PDOException' with message 'SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at or near "AND"
+LINE 2: ...tent.table_id = answer.id AND reply.content_id =  AND reply....
+                                                             ^' in /opt/lbaw/lbaw1461/public_html/melo/database/questions.php:213
+Stack trace:
+#0 /opt/lbaw/lbaw1461/public_html/melo/database/questions.php(213): PDOStatement->execute()
+#1 /opt/lbaw/lbaw1461/public_html/melo/pages/questions/view_question.php(8): getQuestionById('145')
+#2 {main}\nexception 'PDOException' with message 'SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at or near "AND"
+LINE 2: ...tent.table_id = answer.id AND reply.content_id =  AND reply....
+                                                             ^' in /opt/lbaw/lbaw1461/public_html/melo/database/questions.php:213
+Stack trace:
+#0 /opt/lbaw/lbaw1461/public_html/melo/database/questions.php(213): PDOStatement->execute()
+#1 /opt/lbaw/lbaw1461/public_html/melo/pages/questions/view_question.php(8): getQuestionById('145')
+#2 {main}\nexception 'PDOException' with message 'SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at or near "AND"
+LINE 2: ...tent.table_id = answer.id AND reply.content_id =  AND reply....
+                                                             ^' in /opt/lbaw/lbaw1461/public_html/melo/database/questions.php:213
+Stack trace:
+#0 /opt/lbaw/lbaw1461/public_html/melo/database/questions.php(213): PDOStatement->execute()
+#1 /opt/lbaw/lbaw1461/public_html/melo/pages/questions/view_question.php(8): getQuestionById('145')
+#2 {main}\nexception 'PDOException' with message 'SQLSTATE[42601]: Syntax error: 7 ERROR:  syntax error at or near "AND"
+LINE 2: ...tent.table_id = answer.id AND reply.content_id =  AND reply....
+                                                             ^' in /opt/lbaw/lbaw1461/public_html/melo/database/questions.php:213
+Stack trace:
+#0 /opt/lbaw/lbaw1461/public_html/melo/database/questions.php(213): PDOStatement->execute()
+#1 /opt/lbaw/lbaw1461/public_html/melo/pages/questions/view_question.php(8): getQuestionById('145')
+#2 {main}\n

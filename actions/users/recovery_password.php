@@ -68,7 +68,7 @@ try{
     $user = getUserByEmail($email);
     addPasswordToHistory($user['id'], $password);
 } catch( PDOException $e) {
-    // TODO: error when adding password to history
+    error_log($e . '\n', 3, $BASE_DIR . "/logs/log.txt");
 }
 
 $_SESSION['success_messages'][] = 'User password reset successfully';
