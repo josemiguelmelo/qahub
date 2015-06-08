@@ -11,9 +11,9 @@ if (!$_POST['title'] || !$_POST['question']) {
 
 $title = $_POST['title'];
 $question = $_POST['question'];
-
+$tags = $_POST['tags'];
 try {
-	editQuestion($title, "", $question, 1, $_POST['questionId']);
+	editQuestion($title, $tags, $question, 1, $_POST['questionId']);
 } catch (PDOException $e) {
 	die(var_dump($e));
 	$_SESSION['error_messages'][] = 'Error editing question';

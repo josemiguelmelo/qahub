@@ -271,8 +271,8 @@ function updateUser($userId, $name, $email, $password, $avatar)
 function getAllUsers()
 {
 	global $conn;
-	$stmt = $conn->prepare("SELECT * FROM \"User\"");
-	$stmt->execute();
+	$stmt = $conn->prepare("SELECT * FROM \"User\" WHERE id != ?");
+	$stmt->execute(array($_SESSION['user']['id']));
 
 	return $stmt->fetchAll();
 }

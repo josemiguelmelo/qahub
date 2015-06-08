@@ -78,13 +78,18 @@ function editQuestion($title, $tags, $question, $priority, $id)
 {
     global $conn;
 
-    removeQuestionTags($id);
+    $stmt = $conn->prepare("SELECT id FROM content WHERE table_id = ?");
+    $stmt->execute(array($id));
+    $content_id = $stmt->fetch()['id'];
+
+    removeQuestionTags($content_id);
 
     //add tags
     $tags_array = explode(",", $tags);
+
     foreach ($tags_array as $tag) {
         $tag_id = insertTag($tag);
-        insertQuestionTag($id,$tag_id);
+        insertQuestionTag($content_id,$tag_id);
     }
 
     $stmt = $conn->prepare("UPDATE question SET title = ?,content = ?,priority = ? WHERE question.id = $id");
