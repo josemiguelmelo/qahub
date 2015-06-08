@@ -7,6 +7,7 @@ include_once($BASE_DIR.'database/messages.php');
 checkIfLoggedIn();
 
 $questions = getQuestionsByString($_POST['search']);
+$userAdmin = checkAdmin($_SESSION['user']['id']);
 
 $numberOfMessages = getUserMessages($_SESSION['user']['id']);
 
