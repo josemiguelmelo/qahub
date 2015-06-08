@@ -87,6 +87,15 @@ function removeAmount($userId, $amount)
     $stmt->execute(array($userId, $amount, $amount . "dollars removed from account", 2));
 }
 
+function removeAllUserTransactions($user_id)
+{
+    global $conn;
+
+    $stmt = $conn->prepare("DELETE FROM transaction where user_id = ?");
+    $stmt->execute(array($user_id));
+}
+
+
 function isLoginCorrect($email, $password)
 {
 	global $conn;
@@ -301,10 +310,18 @@ function deleteUserId($id)
 	$stmt->execute(array($id));
 	$contents = $stmt->fetchAll();
 
+    removeAllUserTransactions($id);
+
+
 	foreach ($contents as $content)
 	{
+
+
 		if ($content['content_type'] == 1)
 		{
+            removeAllFavouriteQuestionWithId($content['table_id']);
+
+
 			$stmt = $conn->prepare("DELETE FROM Question where id = ?");
 			$stmt->execute(array($content['table_id']));
 		}
@@ -322,8 +339,12 @@ function deleteUserId($id)
 		$stmt->execute(array($content['id']));
 
 
+        deleteAllRepliesFromQuestion($content['table_id']);
+
 		$stmt = $conn->prepare("DELETE FROM Content where id = ?");
 		$stmt->execute(array($content['id']));
+
+
 	}
 
 	$stmt = $conn->prepare("DELETE FROM \"User\" where id = ?");

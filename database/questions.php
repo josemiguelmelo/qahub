@@ -75,6 +75,18 @@ function insertTag($tag)
 
 }
 
+function getContentIdOfQuestion($question_id)
+{
+    global $conn;
+
+    $stmt = $conn->prepare("SELECT id FROM content WHERE table_id = ?");
+    $stmt->execute(array($question_id));
+    $content_id = $stmt->fetch()['id'];
+
+    return $content_id;
+
+}
+
 function editQuestion($title, $tags, $question, $priority, $id)
 {
     global $conn;
@@ -105,21 +117,31 @@ function removeQuestionTags($id) {
     $stmt->execute(array($id));
 }
 
+
+function deleteAllRepliesFromQuestion($question_id)
+{
+    global $conn;
+
+    $contentId = getContentIdOfQuestion($question_id);
+
+    $stmt = $conn->prepare("DELETE FROM reply WHERE content_id = ?");
+    $stmt->execute(array($contentId));
+}
+
 function deleteQuestion($id)
 {
     global $conn;
+
     removeQuestionTags($id);
+
+    deleteAllRepliesFromQuestion($id);
+
+    removeAllFavouriteQuestionWithId($id);
+
     $stmt = $conn->prepare("DELETE FROM Content where content_type = 1 AND table_id = ?");
     $stmt->execute(array($id));
 
-	$stmt = $conn->prepare("DELETE FROM Content where content_type = 1 AND table_id = ?");
-	$stmt->execute(array($id));
-
     $stmt = $conn->prepare("DELETE FROM Question where id = ? ");
-    $stmt->execute(array($id));
-
-
-    $stmt = $conn->prepare("DELETE FROM favouritequestions where question_id = ? ");
     $stmt->execute(array($id));
 }
 
@@ -348,6 +370,14 @@ function removeFavourite($userId, $questionId)
 
     $stmt = $conn->prepare("DELETE FROM favouritequestions where question_id = ? AND user_id = ?");
     $stmt->execute(array($questionId, $userId));
+}
+
+function removeAllFavouriteQuestionWithId($question_id)
+{
+    global $conn;
+
+    $stmt = $conn->prepare("DELETE FROM favouritequestions where question_id = ?");
+    $stmt->execute(array($question_id));
 }
 
 function setAsFavourite($userId, $questionId) {
