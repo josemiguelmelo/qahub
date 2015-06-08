@@ -16,7 +16,7 @@
             <div class="col-md-12">
                 <div class="hpanel">
                     <div class="v-timeline vertical-container animate-panel" data-child="vertical-timeline-block" data-delay="1">
-                        {foreach from=$all_user_questions item=question}
+                        {foreach from=$all_user_questions->data item=question}
                             <div class="vertical-timeline-block animated-panel zoomIn" style="-webkit-animation-delay: 0.2s;">
                                 <div class="vertical-timeline-icon navy-bg">
                                     <i class="fa fa-calendar"></i>
@@ -42,6 +42,12 @@
                                             Question closed.
                                         {/if}
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2 col-md-offset-5">
+                                    {$pagination_links}
                                 </div>
                             </div>
 
