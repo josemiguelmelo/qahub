@@ -13,7 +13,10 @@ $(document).ready(function() {
                 }else{
                     if(data.type == 'IF'){
                         bootbox.alert("Insufficient funds.");
-                    }else{
+                    }else if(data.type == 'NVD'){
+                        bootbox.alert(data.msg);
+                    }
+                    else{
                         bootbox.alert("Could not donate.");
                     }
                 }
