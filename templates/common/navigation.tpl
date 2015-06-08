@@ -34,6 +34,10 @@
                     <div class="stats-label text-color">
                         <span class="font-extra-bold font-uppercase">{$smarty.session.user.name}</span>
                     </div>
+
+                    <div>
+                        <span>Balance: {$smarty.session.user.cash / 100}$</span>
+                    </div>
                 </a>
             </div>
             {if $smarty.session.user.role eq 2} <!-- user is admin -->

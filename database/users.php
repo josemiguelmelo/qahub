@@ -45,6 +45,7 @@ function addReward($user_id,$badge_id) {
 
     addAmount($user_id,$reward_ammount);
 
+    return $reward_ammount;
 }
 
 function addAmount($userId, $amount)

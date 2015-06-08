@@ -43,7 +43,8 @@ function addUserBadges($user_id) {
     if($question_count == 3) {
         $stmt = $conn->prepare("INSERT INTO userbadges (user_id,badge_id) VALUES(?,?)");
         $stmt->execute(array($user_id,1));
-        addReward($user_id,1);
+        $amount = addReward($user_id,1);
+        $_SESSION['user']['cash'] = $_SESSION['user']['cash'] + $amount;
     }
 
 }
