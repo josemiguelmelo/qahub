@@ -2,6 +2,8 @@
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/questions.php');
 include_once($BASE_DIR.'database/messages.php');
+include_once($BASE_DIR.'Paginator.php');
+
 
 
 if (!$_GET['search']) {
@@ -64,10 +66,14 @@ try{
     exit;
 }
 
+$paginator = new Paginator($questions);
 
+$smarty->assign('sponsored_questions', $sponsoredQuestions);
+$numberOfMessages = getUserMessages($_SESSION['user']['id']);
 $smarty->assign('numberOfMessages',$numberOfMessages);
 
-$smarty->assign('all_questions', $questions);
+$smarty->assign('all_questions', ($_GET['limit'] && $_GET['position']) ? $paginator->getData($_GET['limit'], $_GET['position']) : $paginator->getData());
+$smarty->assign('pagination_links', $paginator->createLinks(5, "pagination pagination-sm"));
 $smarty->assign('subtitle', 'Search results');
 
 $smarty->display('questions/view_questions.tpl');

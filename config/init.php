@@ -1,18 +1,18 @@
 <?php
-  session_set_cookie_params(3600, '/~lbaw1461/melo'); //FIXME
+  session_set_cookie_params(3600, '/~lbaw1461/final');
   session_start();
 
-  error_reporting(E_ERROR | E_WARNING); // E_NOTICE by default
+  error_reporting(E_ERROR | E_WARNING);
 
-  $BASE_DIR = '/opt/lbaw/lbaw1461/public_html/melo/'; //FIXME
-  $BASE_URL = '/~lbaw1461/melo/'; //FIXME
+  $BASE_DIR = '/opt/lbaw/lbaw1461/public_html/final/';
+  $BASE_URL = '/~lbaw1461/final/';
 
 
-  $conn = new PDO('pgsql:host=vdbm.fe.up.pt;dbname=lbaw1461', 'lbaw1461', 'fB702dy5'); //FIXME
+  $conn = new PDO('pgsql:host=vdbm.fe.up.pt;dbname=lbaw1461', 'lbaw1461', 'fB702dy5');
   $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-  $conn->exec('SET SCHEMA \'qahub\''); //FIXME
+  $conn->exec('SET SCHEMA \'qahub\'');
 
   include_once($BASE_DIR . 'lib/smarty/SmartyBC.class.php');
 

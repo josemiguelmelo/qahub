@@ -36,7 +36,7 @@
                     </div>
 
                     <div>
-                        <span>Balance: {$smarty.session.user.cash / 100}$</span>
+                        <span>Balance: ${$smarty.session.user.cash / 100}</span>
                     </div>
                 </a>
             </div>

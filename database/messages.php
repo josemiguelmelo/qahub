@@ -15,9 +15,8 @@ function deleteMessage($id)
 
 	try
 	{
-		$stmt = $conn->prepare("DELETE FROM message where id = ?");
-		$stmt->execute(array($id));
-
+		$stmt = $conn->prepare("DELETE FROM message where id = ? and to_id = ?");
+        $stmt->execute(array($id,$_SESSION['user']['id']));
 	}
 	catch (PDOException $e)
 	{
